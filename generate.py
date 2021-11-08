@@ -2,7 +2,7 @@ import os
 import json
 # import nltk
 from email.parser import BytesParser
-import re
+from re import compile
 from nltk.tokenize import word_tokenize
 
 
@@ -12,8 +12,8 @@ def tokenize(sentences=None, sentence=None):
 
     def tokenize_sentence(s1):
         """Sub-function to tokenize just one sentence"""
-        p = re.compile(r'^[re:]|^[fwd:]|^=|[.edu]')
-        q = re.compile(r'[^\w\s]')
+        p = compile(r'^[re:]|^[fwd:]|^=|[.edu]')
+        q = compile(r'[^\w\s]')
         new_tokens1 = []
 
         # If not reply or forward
@@ -79,9 +79,9 @@ def main():
             for line in message.split('\n'):
                 # This is where blind trust comes into play
                 skip = False
-                if re.compile(r'^[--0]|^[Content\-Type]|=').match(line):
+                if compile(r'^[--0]|^[Content\-Type]|=').match(line):
                     skip = True
-                if re.compile(r'^<').match(line):
+                if compile(r'^<').match(line):
                     break
                 if not skip:
                     body = body + f" {line}\n"
@@ -100,7 +100,6 @@ def main():
         json.dump(final_json,
                   save_file,
                   indent=4)
-    return
 
 
 if __name__ == '__main__':
