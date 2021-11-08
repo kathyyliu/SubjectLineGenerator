@@ -1,12 +1,18 @@
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 from sklearn.cluster import MiniBatchKMeans
 from sklearn.metrics import silhouette_samples, silhouette_score
+from nltk.tokenize.treebank import TreebankWordDetokenizer
+import spacy
+from spacy import displacy
 import pandas as pd
 import numpy as np
 import json
+# TODO: we need a virtualenv or something...
 
 
 # https://dylancastillo.co/nlp-snippets-cluster-documents-using-word2vec/#how-to-cluster-documents
+# given email body as list of tokenized sents, embeds and  clusters sents
+# returns most representative sent of all significant clusters
 def embedding(data, verbose=False):
     tagged_data = [TaggedDocument(d, [i]) for i, d in enumerate(data)]
     # embed each sentence in email body
@@ -34,6 +40,7 @@ def embedding(data, verbose=False):
     silhouette_values = []
     for i in range(k):
         cluster_silhouette_values = sample_silhouette_values[kmeans.labels_ == i]
+        # FIXME: mean of empty cluster error sometimes
         silhouette_values.append(
             (i,
             cluster_silhouette_values.shape[0],
@@ -74,11 +81,37 @@ def embedding(data, verbose=False):
     return key_sentences
 
 
+# python3.x -m spacy download en_core_web_sm
+def head(sentence, verbose=False):
+    nlp = spacy.load("en_core_web_sm")
+    detokenize = TreebankWordDetokenizer().detokenize
+    sentence = detokenize(sentence)
+    doc = nlp(sentence)
+    if verbose:
+        print("\n{:<15} | {:<8} | {:<15} | {:<20}".format('Token', 'Relation', 'Head', 'Children'))
+        print("-" * 70)
+        for token in doc:
+            # Print the token, dependency nature, head and all dependents of the token
+            print("{:<15} | {:<8} | {:<15} | {:<20}"
+                  .format(str(token.text), str(token.dep_), str(token.head.text), str([child for child in token.children])))
+        # Use displayCy to visualize the dependency
+        displacy.render(doc, style='dep', options={'distance': 120})
+        print()
+    for token in doc:
+        if str(token.dep_) == "ROOT":
+            return token
+    print(f"Error: root not found for {sentence}")
+
+
 def main():
     f = open('data.json', )
     data = json.load(f)['emails']
-    print(data[0][1])
-    embedding(data[0][1], True)
+    print(data[0][1])           # test just on first email for now
+    sents = []
+    while not sents:
+        sents = embedding(data[0][1], True)
+    for sent in sents:
+        print(f"head: {head(sent, verbose=True)}")
 
 
 if __name__ == '__main__':
