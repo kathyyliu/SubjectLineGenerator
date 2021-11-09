@@ -81,7 +81,9 @@ def embedding(data, verbose=False):
     return key_sentences
 
 
-# python3.x -m spacy download en_core_web_sm
+# https://towardsdatascience.com/natural-language-processing-dependency-parsing-cf094bbbe3f7
+# if modulenotfounderror: python3.x -m spacy download en_core_web_sm
+# given a tokenized sent, returns head word of that sent
 def head(sentence, verbose=False):
     nlp = spacy.load("en_core_web_sm")
     detokenize = TreebankWordDetokenizer().detokenize
@@ -106,12 +108,17 @@ def head(sentence, verbose=False):
 def main():
     f = open('data.json', )
     data = json.load(f)['emails']
-    print(data[0][1])           # test just on first email for now
+    print(f"email body:")           # test just on first email for now
+    detokenize = TreebankWordDetokenizer().detokenize
+    for sent in data[0][1]:
+        print(detokenize(sent))
+    print("\n\t\t\t\t-------------------\n")
     sents = []
     while not sents:
-        sents = embedding(data[0][1], True)
+        sents = embedding(data[0][1], False)
     for sent in sents:
-        print(f"head: {head(sent, verbose=True)}")
+        print(f"representative sent: {detokenize(sent)}")
+        print(f"head: {head(sent, False)}\n")
 
 
 if __name__ == '__main__':
