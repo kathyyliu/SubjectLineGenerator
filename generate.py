@@ -1,9 +1,21 @@
+import re
 import os
 import json
-# import nltk
+import nltk
+from datetime import datetime
+import multiprocessing
 from email.parser import BytesParser
-from re import compile
-from nltk.tokenize import word_tokenize
+from nltk.tokenize import word_tokenize, sent_tokenize
+
+"""
+Tokenizing emails for use in our Subject Line Generator.
+    TO DO:
+    - sent_tokenize instead of word_tokenize
+    - ensure proper punctuation inclusion/exclusion
+"""
+
+Q = None
+POOL = None
 
 
 def tokenize(sentences=None, sentence=None):
@@ -12,8 +24,8 @@ def tokenize(sentences=None, sentence=None):
 
     def tokenize_sentence(s1):
         """Sub-function to tokenize just one sentence"""
-        p = compile(r'^[re:]|^[fwd:]|^=|[.edu]')
-        q = compile(r'[^\w\s]')
+        p = re.compile(r'^[re:]|^[fwd:]|^=|[.edu]')
+        q = re.compile(r'[^\w\s]')
         new_tokens1 = []
 
         # If not reply or forward
@@ -52,6 +64,7 @@ def tokenize(sentences=None, sentence=None):
 
 
 def main():
+    global POOL, Q
     path = './EmailSampleData/'
     final_json = {"emails": []}
     subject_lines = {}
@@ -79,30 +92,77 @@ def main():
             for line in message.split('\n'):
                 # This is where blind trust comes into play
                 skip = False
-                if compile(r'^[--0]|^[Content\-Type]|=').match(line):
+                if re.compile(r'^[--0]|^[Content\-Type]|=').match(line):
                     skip = True
-                if compile(r'^<').match(line):
+                if re.compile(r'^<').match(line):
                     break
                 if not skip:
                     body = body + f" {line}\n"
             bodies[f"{id}"] = body
         id += 1
 
-    for i in subject_lines.keys():
-        # Generate the tokenized lists
-        s = tokenize(sentence=subject_lines[f"{i}"])
-        b = tokenize(sentences=bodies[f"{i}"].split('. '))
-        if s and b:
-            final_json['emails'].append((s, b))
+    i = 0
+    start = datetime.now()
+    length = len(subject_lines.keys())
+    for x in subject_lines.keys():
+        # Generate the tokenized lists with multiprocessing
+        a = subject_lines[f"{x}"]
+        b = bodies[f"{x}"].split('. ')
+        POOL.apply(t, (a, b))
+        i += 1
+        stats(length, start, i, 'Creating processes...     ')
 
+    i = 0
+    start = datetime.now()
+    while True:
+        output = Q.get()
+        if output[0] is not None and output[1] is not None:
+            final_json['emails'].append(output)
+            i += 1
+            stats(length, start, i, 'Finishing processes...      ')
+        if i % 50 == 0:
+            with open('data.json', 'w') as save_file:
+                json.dump(final_json, save_file, indent=4)
+        if i == length:
+            break
+    print(f'Data has been generated and saved')
     with open("data.json", "w") as save_file:
-        # Save data
-        json.dump(final_json,
-                  save_file,
-                  indent=4)
+        json.dump(final_json, save_file, indent=4)
+    return
+
+
+def t(a, b):
+    """Tokenize the subject (a) and the body (b), then put result in multiprocessing queue"""
+    c = tokenize(sentence=a)
+    d = tokenize(sentences=b)
+    Q.put((c, d))
+
+
+def stats(length, start, i, message):
+    """Display process statistics."""
+    ave_time = (datetime.now() - start).seconds / i
+    minutes_left = int(((length - i) * ave_time) / 60)
+    if minutes_left > 0:
+        minutes_message = f'Approximately {minutes_left} minute(s) remaining'
+    else:
+        minutes_message = f'Less than a minute remaining                    '
+
+    print(f'{message}\n'
+          f'{round((i / length) * 100, 2)}% done     \n'
+          f'{minutes_message}',
+          end='\r\033[A\r\033[A\r')
+
+
+def setup():
+    """Initialize starting values and global variables."""
+    global Q, POOL
+    multiprocessing.set_start_method('fork')
+    Q = multiprocessing.Manager().Queue()
+    POOL = multiprocessing.Pool(6)
+    nltk.download('averaged_perceptron_tagger')
+    nltk.download('tagsets')
 
 
 if __name__ == '__main__':
-    # nltk.download('averaged_perceptron_tagger')
-    # nltk.download('tagsets')
+    setup()
     main()
