@@ -2,12 +2,13 @@ from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 from sklearn.cluster import MiniBatchKMeans
 from sklearn.metrics import silhouette_samples, silhouette_score
 from nltk.tokenize.treebank import TreebankWordDetokenizer
+from nltk.tokenize import word_tokenize
+from rake_nltk import Rake
 import spacy
 from spacy import displacy
 import pandas as pd
 import numpy as np
 import json
-# TODO: we need a virtualenv or something...
 
 
 # https://dylancastillo.co/nlp-snippets-cluster-documents-using-word2vec/#how-to-cluster-documents
@@ -50,7 +51,6 @@ def embedding(data, verbose=False):
     silhouette_values = sorted(
         silhouette_values, key=lambda tup: tup[2], reverse=True
     )
-    # FIXME: whyyyy are the coefficients different between runs??
     if verbose:
         print(f"\nSilhouette values:")
         for s in silhouette_values:
@@ -100,9 +100,22 @@ def head(sentence, verbose=False):
         displacy.render(doc, style='dep', options={'distance': 120})
         print()
     for token in doc:
+        # find verb head
         if str(token.dep_) == "ROOT":
-            return token
-    print(f"Error: root not found for {sentence}")
+            for child in token.children:
+                # find subj nouns
+                if child.dep_ in ("nsubj", "dobj", "compound"):
+                    return (token, child)
+
+
+def rake(sent):
+    rake = Rake()
+    if not isinstance(sent, str):
+        detokenize = TreebankWordDetokenizer().detokenize
+        sent = detokenize(sent)
+    kw = rake.extract_keywords_from_text(sent)
+    ranked_phrases = rake.get_ranked_phrases()
+    return ranked_phrases
 
 
 def main():
@@ -118,7 +131,11 @@ def main():
         sents = embedding(data[0][1], False)
     for sent in sents:
         print(f"representative sent: {detokenize(sent)}")
-        print(f"head: {head(sent, False)}\n")
+        phrase = rake(sent)[0]
+        tok_phrase = word_tokenize(phrase)
+        if len(tok_phrase) > 1:
+            print(head(tok_phrase, True))
+        # print(f"heads: {head(sent, True)}\n")
 
 
 if __name__ == '__main__':
