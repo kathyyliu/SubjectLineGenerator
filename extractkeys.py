@@ -102,10 +102,12 @@ def head(sentence, verbose=False):
     for token in doc:
         # find verb head
         if str(token.dep_) == "ROOT":
+            children = []
             for child in token.children:
                 # find subj nouns
                 if child.dep_ in ("nsubj", "dobj", "compound"):
-                    return [token, child]
+                    children.append(child)
+            return [token] + children
 
 
 def rake(sent):

@@ -19,16 +19,17 @@ def label(subject_lines):
             continue
         phrase = extractkeys.rake(line)[0]
         tok_phrase = word_tokenize(phrase)
-        if len(tok_phrase) > 1:
-            x = extractkeys.head(tok_phrase, False)
-            if not x:
-                continue
-            keywords = str(x[0]) + ' ' + str(x[1])
-        else:
-            keywords = str(tok_phrase[0])
+        if len(tok_phrase) <= 1:
+            continue
+        x = extractkeys.head(tok_phrase, False)
+        if len(x) < 3:
+            continue
+        if not x:
+            continue
+        keywords = ''
+        for token in x:
+            keywords += str(token) + ' '
         detokenize = TreebankWordDetokenizer().detokenize
-        print(line)
-        print(keywords)
         labeled["text"].append(detokenize(line))
         labeled["keywords"].append(keywords)
     df = pd.DataFrame(labeled)
@@ -43,20 +44,20 @@ def train(labeled_data):
     # print(nlp(['Delhi', 'India', 'capital'], **params))  # keywords
     # return nlp
 
-    train_df = make_dataset('common_gen', split='train')
-    print(train_df)
-    test_df = make_dataset('common_gen', split='test')
-
-    model = trainer()
-    model.from_pretrained(model_name="t5-small")
-    model.train(train_df=train_df[:100], test_df=test_df[:50], batch_size=2, max_epochs=3, use_gpu=False)
-    model.save_model()
-
-    # train, test = train_test_split(labeled_data, shuffle=True)
+    # train_df = make_dataset('common_gen', split='train')
+    # print(train_df)
+    # test_df = make_dataset('common_gen', split='test')
+    #
     # model = trainer()
-    # model.from_pretrained()
-    # model.train(train_df=train, test_df=test, use_gpu=False)
-    # return model
+    # model.from_pretrained(model_name="t5-small")
+    # model.train(train_df=train_df[:100], test_df=test_df[:50], batch_size=2, max_epochs=3, use_gpu=False)
+    # model.save_model()
+
+    train, test = train_test_split(labeled_data, shuffle=True)
+    model = trainer()
+    model.from_pretrained()
+    model.train(train_df=train, test_df=test, use_gpu=False)
+    return model
 
 
 def generate(model, keywords):
@@ -66,14 +67,14 @@ def generate(model, keywords):
 def main():
     os.environ["TOKENIZERS_PARALLELISM"] = "False"
 
-    # f = open('data.json', )
-    # data = json.load(f)['emails']
-    # subject_lines = []
-    # for email in data:
-    #     subject_lines.append(email[0][0])
-    # df = label(subject_lines)
-    df = 'm'
-    train(df)
+    f = open('smalldata.json', )
+    data = json.load(f)['emails']
+    subject_lines = []
+    for email in data:
+        subject_lines.append(email[0][0])
+    df = label(subject_lines)
+    # df = 'm'
+    # train(df)
     # print(model.predict(["attend", "session"]))
 
 
