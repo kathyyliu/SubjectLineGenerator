@@ -105,7 +105,7 @@ def head(sentence, verbose=False):
             for child in token.children:
                 # find subj nouns
                 if child.dep_ in ("nsubj", "dobj", "compound"):
-                    return (token, child)
+                    return [token, child]
 
 
 def rake(sent):

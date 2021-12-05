@@ -114,7 +114,7 @@ def setup():
 
 def main():
     global POOL, Q
-    mb = mbox('emails.mbox')
+    mb = mbox('Opened-002.mbox')
     final_json = {"emails": []}
     subject_lines = {}
     bodies = {}
