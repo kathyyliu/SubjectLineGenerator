@@ -1,0 +1,1480 @@
+From 1718172757459931668@xxx Sat Dec 04 00:20:29 +0000 2021
+X-GM-THRID: 1718172757459931668
+X-Gmail-Labels: Inbox,Important,Opened,Category Personal
+Delivered-To: kliu4@oxy.edu
+Received: by 2002:a59:6c5:0:b0:23d:dbfa:4662 with SMTP id 188csp1468322vqg;
+        Fri, 3 Dec 2021 16:20:30 -0800 (PST)
+X-Received: by 2002:a25:2446:: with SMTP id k67mr27719176ybk.556.1638577230282;
+        Fri, 03 Dec 2021 16:20:30 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1638577230; cv=none;
+        d=google.com; s=arc-20160816;
+        b=uzKjBOhhOGey84mb+1Nr5+tKIXRH0YP6sWZt6dZJM/slDm25x5px4XQ14CHIWqJMh+
+         pHvJ+vNQxXRemdekvqZ4Nyl05Lud5KdIjiaRCDJqc3sQ/e37gCchjHBN7/unmvYMT9Dx
+         q0HSOL32XQ2a8m4IcUNx5N96oE4fwe8RBX7FWyASazWwEmNAkw+QrVvTl1yfP2kILx3b
+         dZU7TLTS4ZkB17S8zrKMY9EyNExU6k8l2xx4eAZql1mhITnZv1OeRdcjeMHXvV1PR2aG
+         G0BFmklTWdTTHTBruRKmrJ7E/gDEskVl7picimBqxrh4bzizeLJ2j1kuAuZmfYgfCPNu
+         K2vw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=nDIdTQXNIhyj1eEMKJJgzZjLrE4IsanD1u3LTfHDxRo=;
+        b=IpiBHTwviOpvX7bI+NVC6+tb/r0n1sYioVwpBHdveUpvFJaWW7pk4XnPpWgtYh5HYW
+         MnHpYIGAyZSyHD3Ae9TmbjF5glQe2sNiDKZHdAokQuOze3bapmT1gW7t2cfRJipLioag
+         ebaJyIfddwtRRcizGLTgQEOFw0qpBtJBO1pGPLQIVEG1BCDtD43THz1lHjDF4dPxzAlZ
+         vI0dFodJgiQbhU1YPmsjMpyOG9Mwkb2MNfSfA4SmvdYO8qGxO0xBK+M/DZJYSaxq0y/w
+         XNlgLidxpcoZQgbnZe4hc4rC1ONjR/b6hCxpT6PtTsrekjO0EzBtNoxZJnrpccFZeng2
+         Pt8g==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@oxy.edu header.s=google header.b=CYjzU2o2;
+       spf=pass (google.com: domain of muttam@oxy.edu designates 209.85.220.41 as permitted sender) smtp.mailfrom=muttam@oxy.edu
+Return-Path: <muttam@oxy.edu>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id a1sor2212196ybr.159.2021.12.03.16.20.30
+        for <kliu4@oxy.edu>
+        (Google Transport Security);
+        Fri, 03 Dec 2021 16:20:30 -0800 (PST)
+Received-SPF: pass (google.com: domain of muttam@oxy.edu designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@oxy.edu header.s=google header.b=CYjzU2o2;
+       spf=pass (google.com: domain of muttam@oxy.edu designates 209.85.220.41 as permitted sender) smtp.mailfrom=muttam@oxy.edu
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oxy.edu; s=google;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=nDIdTQXNIhyj1eEMKJJgzZjLrE4IsanD1u3LTfHDxRo=;
+        b=CYjzU2o2cf7UJibftbbvtN5LBhCjrGiFtXQRrDcy3EG5Spp3F3R4OWMcUTfhSbFWZy
+         GWNqntWzNZoKwS/q2etDufctAY7Cw6Z3FAEEdKgnvVAva9vQW4JfgR10rTolHm/tv4eJ
+         8uRXc7pD38EXaEdc6u+CuAuI2PGtRvc0QsXJA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=nDIdTQXNIhyj1eEMKJJgzZjLrE4IsanD1u3LTfHDxRo=;
+        b=vX5FtNW1LsGBfQVIl4NwQAIGUIKfJLKsSkhTFnB5Uu/xtBXy/jEDVmPkgf2ekwGkze
+         gAN32OXRJFabMQ1+9rK47u4Ap3HYhtnSI7SV5E0LXHD1+krXIYb+6DYm/AMK8rmXy0EC
+         oqUNAd6OumroyMbQqI3P/vbgskX3aWp0AUw2SlP1WsHczFzFX+J60zXF8TZ9oBEXSApN
+         /dc8WQrgo/WpbELFkT1yd+m1KVe8DcH4369rn892GssLw5D5qYXC5EsDeRVTj4cvyVXE
+         5PF5SMiJK/ye1c0rc4FX7hbHW6b+ExeHlEv1stNcSZAyBFJjEN23pm3mhXbotoNBLa5J
+         HxRw==
+X-Gm-Message-State: AOAM533W23qcXRh0UXeB+uhp44777AW0JRFHxE6VK8ZwbFZPParppw8s
+	dKJlBc7E7vP+jpqzGX7tH01ThGkVBKZ6cMi1EWdQGGxKD2fHq0TL
+X-Google-Smtp-Source: ABdhPJyvdxdNUOz33IJYysHYL7nat7xYaTSgqkGRFZeDdTFsM7qq8Qr7mZ3V/8ZUJngxmzfKwOd2FcNaGsLvfWj2VHI=
+X-Received: by 2002:a25:6c07:: with SMTP id h7mr26529918ybc.603.1638577229832;
+ Fri, 03 Dec 2021 16:20:29 -0800 (PST)
+MIME-Version: 1.0
+From: Maahir Uttam <muttam@oxy.edu>
+Date: Fri, 3 Dec 2021 16:20:14 -0800
+Message-ID: <CAGZGZG21f-yU5g+ChJjDR51EDutkqyPEibT9mp+Q7WJQrPqFPw@mail.gmail.com>
+Subject: Captain check-in tomorrow
+To: tzu kit chan <tchan2@oxy.edu>, Kathy Liu <kliu4@oxy.edu>, Ramit Shukla <rshukla@oxy.edu>,
+	Mark Konopacki <mkonopacki@oxy.edu>, Noah Willis <nwillis@oxy.edu>,
+	James Steinberger <jsteinberger@oxy.edu>, Daniel Renteria <drenteria@oxy.edu>, Jordan Fang <jfang2@oxy.edu>,
+	Alex Yeung <ayeung@oxy.edu>, Alexander Patent <apatent@oxy.edu>, William Baron <wbaron@oxy.edu>
+Content-Type: multipart/alternative; boundary="000000000000b8bbc605d246fdc5"
+
+--000000000000b8bbc605d246fdc5
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi Captains =F0=9F=90=AF
+
+We got all the responses and looks like all of you preferred different
+times for the captain check-in tomorrow.
+
+Let's meet where we met last time (the outdoor tables between the MP and
+Thorne). I'll be there between 12:30 and 2 PM so just come there at any 30
+minute interval in that time. Thanks!
+
+Best,
+Oxy Barbell E-Board
+
+--000000000000b8bbc605d246fdc5
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto">Hi Captains =F0=9F=90=AF<div dir=3D"auto"><br></div><div =
+dir=3D"auto">We got all the responses and looks like all of you preferred d=
+ifferent times for the captain check-in tomorrow.=C2=A0</div><div dir=3D"au=
+to"><br></div><div dir=3D"auto">Let&#39;s meet where we met last time (the =
+outdoor tables between the MP and Thorne). I&#39;ll be there between 12:30 =
+and 2 PM so just come there at any 30 minute interval in that time. Thanks!=
+</div><div dir=3D"auto"><br></div><div dir=3D"auto">Best,</div><div dir=3D"=
+auto">Oxy Barbell E-Board</div></div>
+
+--000000000000b8bbc605d246fdc5--
+
+From 1718151222540443622@xxx Fri Dec 03 18:38:12 +0000 2021
+X-GM-THRID: 1718151222540443622
+X-Gmail-Labels: Inbox,Category Updates,Unread
+Delivered-To: kliu4@oxy.edu
+Received: by 2002:a59:6c5:0:b0:23d:dbfa:4662 with SMTP id 188csp1142420vqg;
+        Fri, 3 Dec 2021 10:38:13 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJwt7HI9DOhSeb/k+T2WIRxDJpyJAjLpULAjaxif+rtvPN0434JkRzBgPSuuwOBlMU2iGPlg
+X-Received: by 2002:a17:90a:5883:: with SMTP id j3mr16056124pji.13.1638556692578;
+        Fri, 03 Dec 2021 10:38:12 -0800 (PST)
+Return-Path: <oxy-students-l-bounces@oxy.edu>
+Received: from mailman.cc.oxy.edu (mailman.cc.oxy.edu. [134.69.3.82])
+        by mx.google.com with ESMTPS id f14si4942921pgk.768.2021.12.03.10.38.11
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Fri, 03 Dec 2021 10:38:12 -0800 (PST)
+Received-SPF: pass (google.com: domain of oxy-students-l-bounces@oxy.edu designates 134.69.3.76 as permitted sender) client-ip=134.69.3.76;
+Authentication-Results: mx.google.com;
+       dkim=neutral (body hash did not verify) header.i=@oxy.edu header.s=google header.b=Cbctiamk;
+       arc=fail (body hash mismatch);
+       spf=pass (google.com: domain of oxy-students-l-bounces@oxy.edu designates 134.69.3.76 as permitted sender) smtp.mailfrom=oxy-students-l-bounces@oxy.edu
+Received: from mailman.cc.oxy.edu (localhost [127.0.0.1])
+	by mailman.cc.oxy.edu (8.14.4/8.14.4) with ESMTP id 1B3IcAbx030689;
+	Fri, 3 Dec 2021 10:38:10 -0800
+Received: from smtp-incoming4.cc.oxy.edu (smtp-incoming4.cc.oxy.edu
+	[134.69.3.76])
+	by mailman.cc.oxy.edu (8.14.4/8.14.4) with ESMTP id 1B3IV55e026675
+	for <oxy-students-l@mailman.cc.oxy.edu>; Fri, 3 Dec 2021 10:31:05 -0800
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
+	[209.85.214.198])
+	by smtp-incoming4.cc.oxy.edu (8.15.2/8.15.2) with ESMTPS id
+	1B3IV5WF091958
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <oxy-students-l@oxy.edu>; Fri, 3 Dec 2021 10:31:05 -0800
+Received: by mail-pl1-f198.google.com with SMTP id
+	l14-20020a170903120e00b00143cc292bc3so1105857plh.1
+	for <oxy-students-l@oxy.edu>; Fri, 03 Dec 2021 10:31:05 -0800 (PST)
+X-Gm-Message-State: AOAM5330F2OWr95Kqjc9b83sRg6HjCr5+tx1ABXrD2sWu4UhiE8alYtM
+	N/m3MGz+q5kwE/16+Ax5KsWlLmCu2Na0fv03uu4zhwRu/f7AT/AwzQbZRlWx8IInnreX8bGOCAQ
+	IaxdpvcIDJC16dtz735Re8atS
+X-Received: by 2002:a63:854a:: with SMTP id u71mr5766119pgd.66.1638556264889;
+	Fri, 03 Dec 2021 10:31:04 -0800 (PST)
+X-Received: by 2002:a63:854a:: with SMTP id u71mr5766033pgd.66.1638556263872;
+	Fri, 03 Dec 2021 10:31:03 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1638556263; cv=none;
+	d=google.com; s=arc-20160816;
+	b=uXz/7pTagdmVn7KN7Ii/s6ttkK86eH4So+Z0+KLPW9Ogqfge916aHv0LhoXO/Seq/Y
+	MfTh0PalvxKUIKJ66xBj0cj8mE/eLICSS9g+J0m+5h6k8yU+g+uyIxvdb0Mj/bcChsAZ
+	3QxE8u9DnJQpyNBD0nR3EwEnI4rQ3S2bWMhVSa9EfJ2zQHcEpKm2Y7TnyN1z2y8GWFSD
+	ljHkGsO3lPZVlEToo5x2B1P0kF8Nb79NosOdXi4+sPsr/3R7kZP3yvehvCF6GuHKn6mz
+	OO9JljloCMlN0fDy9SL6tl5SB+v1NV12qaFDVLk+aj0ewKWvEuhSH6V7SDgweVoZpF1F
+	UbAA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+	s=arc-20160816;
+	h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+	:dkim-signature;
+	bh=kPHwCF2rhSoPowCmlJPRCEAW/FFqYUWisKEVRTYcq/A=;
+	b=WfsIGfIabDvi3es5/GLoiupV/Afs64UwJBU5gesBNqEC9M77R4AOL1eob3NEiVioxS
+	aH88svyqQKM8GFnYPRo9PEya2TM6dCmpq8MQLDWjXAM6Y3G9yVL34XV5otFzHy/vxwk0
+	l5PhQWjsPef6EvKnSFIyDGK67Pt2pmTxNPnIhQ7ad1r4UndAWq7aLTBDPsgDeo4BgMV8
+	qut0uHITOrPubjq+UmstPtcFGMxss9wn32nqa2sYiMnbRISA+q3jdgu1JMnTwruVBIp9
+	0K6VNpVeN1z77tOAZ2mto6PEjYZJFrbtr07OUxg+UmyEwma6UduorgiKGbycU6SGBb3E
+	NXSQ==
+ARC-Authentication-Results: i=1; mx.google.com;
+	dkim=pass header.i=@oxy.edu header.s=google header.b=Cbctiamk;
+	spf=pass (google.com: domain of urc@oxy.edu designates 209.85.220.41 as
+	permitted sender) smtp.mailfrom=urc@oxy.edu
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com.
+	[209.85.220.41])
+	by mx.google.com with SMTPS id mi1sor4037872pjb.17.2021.12.03.10.31.03
+	for <oxy-students-l@oxy.edu> (Google Transport Security);
+	Fri, 03 Dec 2021 10:31:03 -0800 (PST)
+Received-SPF: pass (google.com: domain of urc@oxy.edu designates 209.85.220.41
+	as permitted sender) client-ip=209.85.220.41;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oxy.edu; s=google;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+	bh=kPHwCF2rhSoPowCmlJPRCEAW/FFqYUWisKEVRTYcq/A=;
+	b=CbctiamkXLltH/0nPtlRCp7HD6qn7TSe3wEUgCnXMgpnlKkp/Xh0ImmeLrNIg98nxp
+	Js9UJ6B0lNZeEdRdC1vhtb6dkZTRQ2292z2HGXfqk6C4DecFk56LRJXTP1NVjt5RBj5+
+	7bHNsPNT7OVsFKR+IFWUy/9DScArHppP7Da2g=
+X-Received: by 2002:a17:90b:4b90:: with SMTP id
+	lr16mr16026869pjb.57.1638556263436;
+	Fri, 03 Dec 2021 10:31:03 -0800 (PST)
+MIME-Version: 1.0
+References: <CABLuzLWJY6a-b6wzZfhZmL4zf=Ph1Mvbj=M_q+vMogD1XV2x_Q@mail.gmail.com>
+In-Reply-To: <CABLuzLWJY6a-b6wzZfhZmL4zf=Ph1Mvbj=M_q+vMogD1XV2x_Q@mail.gmail.com>
+From: Undergraduate Research <urc@oxy.edu>
+Date: Fri, 3 Dec 2021 10:30:33 -0800
+Message-ID: <CABLuzLWmh=2R+BNVkpK=44iogtAw-7WLe6w9j-hM1+=D=q-J0A@mail.gmail.com>
+To: undisclosed-recipients:;
+X-Mailman-Approved-At: Fri, 03 Dec 2021 10:38:09 -0800
+Subject: [Oxy-students-l] URC: Important ASP Dates and Upcoming Deadlines
+X-BeenThere: oxy-students-l@oxy.edu
+X-Mailman-Version: 2.1.12
+Precedence: list
+List-Id: <oxy-students-l.oxy.edu>
+List-Unsubscribe: <http://mailman.oxy.edu/mailman/options/oxy-students-l>,
+	<mailto:oxy-students-l-request@oxy.edu?subject=unsubscribe>
+List-Post: <mailto:oxy-students-l@oxy.edu>
+List-Help: <mailto:oxy-students-l-request@oxy.edu?subject=help>
+List-Subscribe: <http://mailman.oxy.edu/mailman/listinfo/oxy-students-l>,
+	<mailto:oxy-students-l-request@oxy.edu?subject=subscribe>
+Content-Type: multipart/mixed; boundary="===============8136899901722319902=="
+Sender: oxy-students-l-bounces@oxy.edu
+Errors-To: oxy-students-l-bounces@oxy.edu
+
+--===============8136899901722319902==
+Content-Type: multipart/alternative; boundary="00000000000006e82805d2421c9c"
+
+--00000000000006e82805d2421c9c
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+*Academic Student Projects (ASP) Grants
+<https://www.oxy.edu/academics/student-research/urc/student-funding-project=
+s-travel/academic-student-project-grants>*
+
+
+*Spring Deadlines:*
+
+December 13 (early decision)
+
+February 11, 2022
+
+
+
+*Award:* max $300
+
+
+
+The ASP grant provides funding for consumable research supplies for
+students=E2=80=99 independent research study projects or comps research dur=
+ing the
+academic year. Supplies for art, video, and performance projects, oral
+history, compensation for research participants, and educational outreach
+in the local community may also be funded. Projects must be primarily
+academic in nature, although not-for-credit activities can receive support.
+
+
+
+
+*ASP Conference Travel Grants
+<https://www.oxy.edu/academics/student-research/urc/student-funding-project=
+s-travel/asp-conference-travel-grants>*
+
+
+*Deadline:* 4 weeks prior to the date of the conference
+
+
+
+*Award:* max $600
+
+
+
+The ASP Conference Travel grants provide funding for registration fees,
+travel*, and other conference-related expenses to students presenting at
+professional conferences in their academic field of study. **Please note:
+All College-sponsored international travel is currently prohibited for the
+2021-22 academic year.*
+
+
+
+Funding is available for students to present at prestigious conferences
+such as the American Chemical Society, Biophysical Society Annual Meeting,
+the Western Psychological Association, and the Geological Society of
+America Annual Meeting =E2=80=93 to name just a few! Conferences are a grea=
+t way to
+network and meet with potential grad school advisors and fellow student
+researchers who present their work. To find a conference that is
+appropriate for you, please speak to your research advisor.
+
+
+
+
+Visit the URC website <https://www.oxy.edu/academics/student-research/urc>
+ for detailed information on the research opportunities we have to offer. S=
+ee
+the URC=E2=80=99s Applications & Reports Moodle Portal
+<https://moodle.oxy.edu/course/view.php?id=3D10089> for full application
+instructions and submission. Log in using your Oxy sign-in is required on
+Moodle. *Please note:* each student can apply for each ASP Award (grant,
+conference, and travel) once per academic year.
+
+
+
+ Questions? Email the urc@oxy.edu or schedule a one-on-one Zoom via
+the URC Google
+Calendar
+<https://calendar.google.com/calendar/u/0/selfsched?sstoken=3DUU53el9rUENDe=
+HNOfGRlZmF1bHR8YmYyZWYxM2Y0ZDZiMTQxZjFiOTI5YjRiNWFjMjI0MjA>
+.
+
+
+Best,
+
+URC Staff
+
+
+*______________________________________________________*
+
+
+*Undergraduate Research Center *urc@oxy.edu|  T 323-259-1414
+
+Library/Academic Commons, 2nd floor, Old Wing, Rooms 253A
+
+*OXY*
+*Occidental College *URC F24 | 1600 Campus Road  | Los Angeles, California
+90041-3314
+oxy.edu <http://www.oxy.edu/>  |  URC
+<https://www.oxy.edu/academics/student-research/undergraduate-research-cent=
+er>
+  |  Instagram <https://www.instagram.com/urc.oxy/>
+
+--00000000000006e82805d2421c9c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_quote"><div dir=3D"ltr"><div dir=3D"lt=
+r"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div=
+ dir=3D"ltr"><p class=3D"MsoNormal" style=3D"text-align:left;margin-bottom:=
+0.0001pt;line-height:normal"><b><font face=3D"arial, sans-serif"><font size=
+=3D"4"><i style=3D"background-color:rgb(255,242,204)"><a href=3D"https://ww=
+w.oxy.edu/academics/student-research/urc/student-funding-projects-travel/ac=
+ademic-student-project-grants" target=3D"_blank">Academic Student Projects =
+(ASP) Grants</a></i></font></font></b><br></p>
+
+<p class=3D"MsoNormal" style=3D"margin-bottom:0.0001pt;line-height:normal">=
+<b style=3D"font-family:arial,sans-serif"><i><u><br></u></i></b></p><p clas=
+s=3D"MsoNormal" style=3D"margin-bottom:0.0001pt;line-height:normal"><b><i><=
+u><font face=3D"arial, sans-serif">Spring
+Deadlines:</font></u></i></b><br></p>
+
+<p class=3D"MsoNormal" style=3D"margin-bottom:0.0001pt;line-height:normal">=
+<font face=3D"arial, sans-serif">December
+13 (early decision) <span></span></font></p>
+
+<p class=3D"MsoNormal" style=3D"margin-bottom:0.0001pt;line-height:normal">=
+<font face=3D"arial, sans-serif">February
+11, 2022<span></span></font></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt 0.5in;line-height:n=
+ormal"><font face=3D"arial, sans-serif">=C2=A0</font></p>
+
+<p class=3D"MsoNormal" style=3D"margin-bottom:0.0001pt;line-height:normal">=
+<font face=3D"arial, sans-serif"><b><i><u>Award:</u></i></b> max $300<span>=
+</span></font></p>
+
+<p class=3D"MsoNormal" style=3D"margin-bottom:0.0001pt;line-height:normal">=
+<font face=3D"arial, sans-serif">=C2=A0</font></p>
+
+<p class=3D"MsoNormal" style=3D"margin-bottom:0.0001pt;line-height:normal">=
+<font face=3D"arial, sans-serif">The ASP
+grant provides funding for consumable research supplies for students=E2=80=
+=99
+independent research study projects or comps research during the academic y=
+ear.
+Supplies for art, video, and performance projects, oral history, compensati=
+on
+for research participants, and educational outreach in the local community =
+may
+also be funded. <span style=3D"color:black">Projects must be primarily acad=
+emic
+in nature, although not-for-credit activities can receive support.</span><s=
+pan></span></font></p>
+
+<p class=3D"MsoNormal" style=3D"margin-bottom:0.0001pt;line-height:normal">=
+<br></p>
+
+<p class=3D"MsoNormal" style=3D"margin-bottom:0.0001pt;line-height:normal">=
+<font face=3D"arial, sans-serif">=C2=A0</font></p>
+
+<p class=3D"MsoNormal" style=3D"margin-bottom:0.0001pt;line-height:normal">=
+<b><font face=3D"arial, sans-serif" style=3D"background-color:rgb(252,229,2=
+05)"><i><font size=3D"4"><a href=3D"https://www.oxy.edu/academics/student-r=
+esearch/urc/student-funding-projects-travel/asp-conference-travel-grants" t=
+arget=3D"_blank">ASP Conference Travel Grants</a></font></i><span></span></=
+font></b></p><p class=3D"MsoNormal" style=3D"margin-bottom:0.0001pt;line-he=
+ight:normal"><b><font face=3D"arial, sans-serif"><i><font size=3D"4"><br></=
+font></i></font></b></p>
+
+<p class=3D"MsoNormal" style=3D"margin-bottom:0.0001pt;line-height:normal">=
+<font face=3D"arial, sans-serif"><b><i><u>Deadline:</u></i></b> 4 weeks pri=
+or to the
+date of the conference<span></span></font></p>
+
+<p class=3D"MsoNormal" style=3D"margin-bottom:0.0001pt;line-height:normal">=
+<font face=3D"arial, sans-serif">=C2=A0</font></p>
+
+<p class=3D"MsoNormal" style=3D"margin-bottom:0.0001pt;line-height:normal">=
+<font face=3D"arial, sans-serif"><b><i><u>Award:</u></i></b> max $600<span>=
+</span></font></p>
+
+<p class=3D"MsoNormal" style=3D"margin-bottom:0.0001pt;line-height:normal">=
+<font face=3D"arial, sans-serif">=C2=A0</font></p>
+
+<p class=3D"MsoNormal" style=3D"margin-bottom:0.0001pt;line-height:normal">=
+<font face=3D"arial, sans-serif">The ASP
+Conference Travel grants provide funding for registration fees, travel*, an=
+d
+other conference-related expenses to students presenting at professional
+conferences in their academic field of study. <i>*Please note: All College-=
+sponsored international travel is currently
+prohibited for the 2021-22 academic year.<span></span></i></font></p>
+
+<p class=3D"MsoNormal" style=3D"margin-bottom:0.0001pt;line-height:normal">=
+<font face=3D"arial, sans-serif">=C2=A0</font></p>
+
+<p class=3D"MsoNormal" style=3D"margin-bottom:0.0001pt;line-height:normal">=
+<font face=3D"arial, sans-serif">Funding
+is available for students to present at prestigious conferences such as the
+American Chemical Society, Biophysical Society Annual Meeting, the Western =
+Psychological
+Association, and the Geological Society of America Annual Meeting =E2=80=93=
+ to name
+just a few!=C2=A0</font><span style=3D"font-family:arial,sans-serif">Confer=
+ences
+are a great way to network and meet with potential grad school advisors and
+fellow student researchers who present their work. To find a conference tha=
+t is
+appropriate for you, please speak to your research advisor.</span></p>
+
+<p class=3D"MsoNormal" style=3D"margin-bottom:0.0001pt;line-height:normal">=
+<font face=3D"arial, sans-serif">=C2=A0</font></p><p class=3D"MsoNormal" st=
+yle=3D"margin-bottom:0.0001pt;line-height:normal"><br></p><p class=3D"MsoNo=
+rmal" style=3D"text-align:center;margin-bottom:0.0001pt;line-height:normal"=
+><font size=3D"4" face=3D"arial, sans-serif"><font color=3D"#000000">V</fon=
+t><font color=3D"#000000">isit the=C2=A0</font><a href=3D"https://www.oxy.e=
+du/academics/student-research/urc" target=3D"_blank"><font color=3D"#ff9900=
+">URC website</font></a>=C2=A0for<font color=3D"#000000">=C2=A0detailed inf=
+ormation on the research opportunities we have to offer</font><font color=
+=3D"#000000">.=C2=A0</font><font color=3D"#000000">See the</font><font colo=
+r=3D"#ed8917">=C2=A0</font><a href=3D"https://moodle.oxy.edu/course/view.ph=
+p?id=3D10089" target=3D"_blank"><font color=3D"#ff9900">URC=E2=80=99s Appli=
+cations &amp; Reports Moodle Portal</font></a><span style=3D"color:rgb(237,=
+137,23)">=C2=A0</span><font color=3D"#000000">for full application instruct=
+ions and submission.=C2=A0</font><font color=3D"#000000">Log in using your =
+Oxy sign-in is required on Moodle. <i>Please note:</i> e</font>ach student =
+can apply for each ASP Award (grant, conference, and travel) once per acade=
+mic year.</font></p>
+
+<p class=3D"MsoNormal" style=3D"text-align:center;margin-bottom:0.0001pt;li=
+ne-height:normal"><font size=3D"4" face=3D"arial, sans-serif">=C2=A0</font>=
+</p>
+
+<p class=3D"MsoNormal" style=3D"text-align:center;margin-bottom:0.0001pt;li=
+ne-height:normal"><font size=3D"4" face=3D"arial, sans-serif">=C2=A0Questio=
+ns? Email the <a href=3D"mailto:urc@oxy.edu" style=3D"background-color:rgb(=
+255,255,255)" target=3D"_blank"><font color=3D"#ff9900">urc@oxy.edu</font><=
+/a> or schedule a one-on-one Zoom via the URC=C2=A0<a href=3D"https://calen=
+dar.google.com/calendar/u/0/selfsched?sstoken=3DUU53el9rUENDeHNOfGRlZmF1bHR=
+8YmYyZWYxM2Y0ZDZiMTQxZjFiOTI5YjRiNWFjMjI0MjA" style=3D"background-color:rgb=
+(255,255,255)" target=3D"_blank"><font color=3D"#ff9900">Google Calendar</f=
+ont></a>.</font></p><p class=3D"MsoNormal" style=3D"text-align:center;margi=
+n-bottom:0.0001pt;line-height:normal"><br></p><p class=3D"MsoNormal" style=
+=3D"text-align:left;margin-bottom:0.0001pt;line-height:normal"><span style=
+=3D"font-family:arial,sans-serif">Best,</span><br></p><div dir=3D"ltr"><div=
+ dir=3D"ltr"><div><p class=3D"MsoNormal" style=3D"margin-bottom:0.0001pt;li=
+ne-height:normal"><font face=3D"arial, sans-serif">URC Staff</font></p><p c=
+lass=3D"MsoNormal" style=3D"margin-bottom:0.0001pt;line-height:normal"><br>=
+</p></div><div><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=
+=3D"ltr"><div dir=3D"ltr"><font color=3D"#000000" face=3D"Times New Roman" =
+size=3D"3">
+
+</font></div></div></div></div></div></div></div></div><p class=3D"MsoNorma=
+l" style=3D"text-align:left;margin-bottom:0.0001pt;line-height:normal"><b><=
+span style=3D"color:rgb(255,153,0)"><font face=3D"arial, sans-serif">______=
+________________________________________________</font></span></b><br></p><=
+div><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><di=
+v dir=3D"ltr"><p style=3D"background:white;margin:0in 0in 0pt"><font face=
+=3D"arial, sans-serif"><b><span style=3D"color:rgb(255,153,0)">Undergraduat=
+e Research Center<br>
+</span></b><span style=3D"color:rgb(89,89,89)"><a href=3D"mailto:urc@oxy.ed=
+u" target=3D"_blank">urc@oxy.edu</a></span><span style=3D"color:rgb(102,102=
+,102)">|
+=C2=A0T 323-259-1414</span></font></p><font color=3D"#000000" face=3D"arial=
+, sans-serif">
+
+</font><p style=3D"background:white;margin:0in 0in 0pt"><span style=3D"colo=
+r:rgb(89,89,89);letter-spacing:0.25pt"><font face=3D"arial, sans-serif">Lib=
+rary/Academic Commons, 2nd floor, Old Wing, Rooms 253A</font></span></p><fo=
+nt color=3D"#000000" face=3D"arial, sans-serif">
+
+</font><p style=3D"background:white"><font face=3D"arial, sans-serif"><b><s=
+pan style=3D"background:white;color:rgb(255,153,0)">OXY</span></b><span><b>=
+<span style=3D"background:white;color:rgb(102,102,102)">=C2=A0</span></b></=
+span><b><span style=3D"background:white;color:rgb(102,102,102)">Occidental =
+College<br>
+</span></b><span style=3D"color:rgb(102,102,102)">URC F24 | 1600
+Campus Road =C2=A0| Los Angeles, California 90041-3314<br>
+</span><a href=3D"http://www.oxy.edu/" target=3D"_blank"><span style=3D"col=
+or:rgb(17,85,204)">oxy.edu</span></a><span><span style=3D"color:rgb(136,136=
+,136)">=C2=A0</span></span><span style=3D"color:rgb(136,136,136)">=C2=A0</s=
+pan><span style=3D"color:rgb(204,204,204)">|</span><span><span style=3D"col=
+or:rgb(136,136,136)">=C2=A0 <a href=3D"https://www.oxy.edu/academics/studen=
+t-research/undergraduate-research-center" target=3D"_blank">URC</a>=C2=A0<s=
+pan style=3D"color:rgb(204,204,204)"> | <span>=C2=A0</span></span></span></=
+span><a href=3D"https://www.instagram.com/urc.oxy/" target=3D"_blank"><span=
+ style=3D"color:rgb(17,85,204)">Instagram</span></a></font></p><font color=
+=3D"#000000" face=3D"Times New Roman" size=3D"3">
+
+</font></div></div></div></div></div></div></div></div></div></div></div></=
+div></div>
+</div></div>
+
+--00000000000006e82805d2421c9c--
+
+--===============8136899901722319902==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Oxy-students-l mailing list
+Oxy-students-l@oxy.edu
+http://mailman.oxy.edu/mailman/listinfo/oxy-students-l
+--===============8136899901722319902==--
+
+From 1718056963648536800@xxx Thu Dec 02 17:40:00 +0000 2021
+X-GM-THRID: 1718056963648536800
+X-Gmail-Labels: Inbox,Category Forums,Unread
+Delivered-To: kliu4@oxy.edu
+Received: by 2002:a59:6c5:0:b0:23d:dbfa:4662 with SMTP id 188csp860074vqg;
+        Thu, 2 Dec 2021 09:40:00 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJy/KUPb8mk+OzxU5zHSZafRyZd6ZRJYnMQ4/XKltKTe9bFSz1xswDj7JqQicoPR1UTKeN04
+X-Received: by 2002:a17:902:f54f:b0:143:b899:a9ce with SMTP id h15-20020a170902f54f00b00143b899a9cemr16724024plf.28.1638466800315;
+        Thu, 02 Dec 2021 09:40:00 -0800 (PST)
+Return-Path: <oxy-students-l-bounces@oxy.edu>
+Received: from mailman.cc.oxy.edu (mailman.cc.oxy.edu. [134.69.3.82])
+        by mx.google.com with ESMTPS id u10si446933pgp.253.2021.12.02.09.39.37
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Thu, 02 Dec 2021 09:40:00 -0800 (PST)
+Received-SPF: pass (google.com: domain of oxy-students-l-bounces@oxy.edu designates 134.69.3.75 as permitted sender) client-ip=134.69.3.75;
+Authentication-Results: mx.google.com;
+       dkim=neutral (body hash did not verify) header.i=@oxy.edu header.s=google header.b=aYCPLyx7;
+       arc=fail (body hash mismatch);
+       spf=pass (google.com: domain of oxy-students-l-bounces@oxy.edu designates 134.69.3.75 as permitted sender) smtp.mailfrom=oxy-students-l-bounces@oxy.edu
+Received: from mailman.cc.oxy.edu (localhost [127.0.0.1])
+	by mailman.cc.oxy.edu (8.14.4/8.14.4) with ESMTP id 1B2Hda2m026547;
+	Thu, 2 Dec 2021 09:39:36 -0800
+Received: from smtp-incoming3.cc.oxy.edu (smtp-incoming3.cc.oxy.edu
+	[134.69.3.75])
+	by mailman.cc.oxy.edu (8.14.4/8.14.4) with ESMTP id 1B2G1sHl000327
+	for <oxy-students-l@mailman.cc.oxy.edu>; Thu, 2 Dec 2021 08:01:54 -0800
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+	[209.85.160.198])
+	by smtp-incoming3.cc.oxy.edu (8.15.2/8.15.2) with ESMTPS id
+	1B2G1sJn038376
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <oxy-students-l@oxy.edu>; Thu, 2 Dec 2021 08:01:54 -0800
+Received: by mail-qt1-f198.google.com with SMTP id
+	o12-20020a05622a008c00b002aff5552c89so74498qtw.23
+	for <oxy-students-l@oxy.edu>; Thu, 02 Dec 2021 08:01:54 -0800 (PST)
+X-Gm-Message-State: AOAM530U7qryN1+YlRXQhQiaVtlNVL5foDrdmiWXubzGIb2xHPKNCgDF
+	oXiSc517GrIMaGMMhV91X14yRj4S1B6IjAdRSgkaXT6VpTvGEy0WHvv4gMEsL/grMBlzZN0GEqG
+	Uq19RwXCD5rmTOBQrIRrvosZM
+X-Received: by 2002:ac8:7d8a:: with SMTP id c10mr14750943qtd.415.1638460913880;
+	Thu, 02 Dec 2021 08:01:53 -0800 (PST)
+X-Received: by 2002:ac8:7d8a:: with SMTP id c10mr14750759qtd.415.1638460912551;
+	Thu, 02 Dec 2021 08:01:52 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1638460912; cv=none;
+	d=google.com; s=arc-20160816;
+	b=yB7CyaM2p33lSXLYO4SqKyf/OfagGUlgg7AxQgI4zGxoWisdIE16oAcpj1Hazg/lOj
+	XGNgS865ucGIl85ciHIscB1GT4yspY19IhFqsxVFijX4X78vttzIiuW+14InHECoVpFR
+	r60lrEchfCb4rYuMU9pDjK76weVTo2TSr1/hQx0l8BcO7ZaZrl6tj3QV99iO3CsBYOeD
+	qQYRlTiRRSjFgCk2l2Gb5LbhQHwkizJP8Dm1R/ZktUdQvGQt7qgmHsUOmueT4QuF9QXh
+	85nDsikB/P+zDxLnZd5oGThTx31o6dk+OmrrqnzzKyHTGMkELSIw2w1Uxxy2rc7JZm90
+	y3rw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+	s=arc-20160816;
+	h=cc:to:subject:message-id:date:from:mime-version:dkim-signature;
+	bh=g7WECVgMGy0nqi06HJjEtzO0Gl8+JvZitKRpFTo1zaM=;
+	b=X9JklrsZHtpLjdS4NtLlbF49826/pm+255R4jK/fcmp+QSFlzmPQklHOvfbvNd/eHM
+	kPhgAEJDDrJ0D0N/XrdBs2SFZS5z9z7XwoBSVG3jSiQLfzy1leZImGNttdSXiMfG1CCS
+	7pWEpQgU3+6mX3la+v6OJtTb2kBo0WQoKj63pmk73QUAPeIzYoo+h2uetM2JxjKoJlC5
+	cgx+hX7puEo7GEXrM+qWYzpG1M3IJ7zsGWqNisxZQdQDqZDE9kwthkkIBPuGPrLCrBCZ
+	CPuOjSWDFYucgfQ8xNWloJe9SY1C8wm8zYd3l582+b/fSgeCC/o7cRPCkH8YCYfIszoG
+	76Bg==
+ARC-Authentication-Results: i=1; mx.google.com;
+	dkim=pass header.i=@oxy.edu header.s=google header.b=aYCPLyx7;
+	spf=pass (google.com: domain of brighous@oxy.edu designates
+	209.85.220.41 as permitted sender)
+	smtp.mailfrom=brighous@oxy.edu
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com.
+	[209.85.220.41])
+	by mx.google.com with SMTPS id o9sor215810qtw.60.2021.12.02.08.01.52
+	for <oxy-students-l@oxy.edu> (Google Transport Security);
+	Thu, 02 Dec 2021 08:01:52 -0800 (PST)
+Received-SPF: pass (google.com: domain of brighous@oxy.edu designates
+	209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oxy.edu; s=google;
+	h=mime-version:from:date:message-id:subject:to:cc;
+	bh=g7WECVgMGy0nqi06HJjEtzO0Gl8+JvZitKRpFTo1zaM=;
+	b=aYCPLyx7S3pe6/RvbPI8PQlerGoXrTrajWqFkKBBMmxZBx0QxB5EH7dbjpZHGybKAo
+	3LPS6tjYwm278L0SmgpIRw0MXtreo8F9EwpLCZh0SuuOXKWUGVEwIAc8l4mDPMVE+fv4
+	M/fo+hWboajKtnyqPre876bFE6FoJOEzxu79s=
+X-Received: by 2002:a05:622a:1888:: with SMTP id
+	v8mr14527027qtc.206.1638460911928;
+	Thu, 02 Dec 2021 08:01:51 -0800 (PST)
+MIME-Version: 1.0
+From: Carolyn Brighouse <brighous@oxy.edu>
+Date: Thu, 2 Dec 2021 08:00:00 -0800
+Message-ID: <CAON9+aTRKr6CwokHuCCZrGNa_g4+fLMW9oN+FJZX13wHy6zz7Q@mail.gmail.com>
+To: oxy-students-l@oxy.edu
+X-Mailman-Approved-At: Thu, 02 Dec 2021 09:39:33 -0800
+Cc: Rob Flot <flot@oxy.edu>, Luci Masredjian <masredjian@oxy.edu>,
+        James Herr <herr@oxy.edu>, Wendy Sternberg <sternberg@oxy.edu>,
+        Edmond Johnson <edmondjohnson@oxy.edu>, Julie Prebel <jprebel@oxy.edu>,
+        Mariam Ashchyan <mashchyan@oxy.edu>
+Subject: [Oxy-students-l] Resources and Support for Students for the end of
+	the semester
+X-BeenThere: oxy-students-l@oxy.edu
+X-Mailman-Version: 2.1.12
+Precedence: list
+List-Id: <oxy-students-l.oxy.edu>
+List-Unsubscribe: <http://mailman.oxy.edu/mailman/options/oxy-students-l>,
+	<mailto:oxy-students-l-request@oxy.edu?subject=unsubscribe>
+List-Post: <mailto:oxy-students-l@oxy.edu>
+List-Help: <mailto:oxy-students-l-request@oxy.edu?subject=help>
+List-Subscribe: <http://mailman.oxy.edu/mailman/listinfo/oxy-students-l>,
+	<mailto:oxy-students-l-request@oxy.edu?subject=subscribe>
+Content-Type: multipart/mixed; boundary="===============7713041364954737263=="
+Sender: oxy-students-l-bounces@oxy.edu
+Errors-To: oxy-students-l-bounces@oxy.edu
+
+--===============7713041364954737263==
+Content-Type: multipart/alternative; boundary="000000000000a262be05d22be851"
+
+--000000000000a262be05d22be851
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Dear Oxy Students,
+
+
+As your classes come to a close this week and you prepare for your final
+assignments and exams we wanted to reach out to make sure you know of the
+grading policies, the processes associated with those policies, and the
+resources that are available to support you through the next few weeks.
+This semester has been fast paced and intense for you and for your
+instructors, and we want to do all we can to support you through the
+home-stretch.
+
+
+Faculty are being as flexible as they can be while maintaining what is
+essential to the goals of their courses and the curriculum. The deadline
+for requests to late drop (withdraw), receive an incomplete, or request the
+S/U grade mode for your courses is this Friday, December 3rd. You have
+received an email from Jim Herr, Oxy=E2=80=99s Registrar, which describes t=
+hese
+policies and the processes you need to follow, in detail. Please do read
+that email carefully.
+
+
+We know that the end of a semester comes with an increase in stress, and
+there are many resources available to help you if you have questions or do
+not know where to turn. Answers to general questions about S/U and other
+end of semester policies can be found in the
+<https://oxy.smartcatalogiq.com/en/2019-2020/Catalog>College Catalog
+<https://oxy.smartcatalogiq.com/2021-2022/Catalog> and various department
+Frequently Asked Questions (FAQs) pages, including on the sites of the
+registrar=E2=80=99s COVID-19 related policy adjustments page
+<https://www.oxy.edu/academics/registrars-office/covid-19-related-policy-ad=
+justments>,
+and pages of Student Affairs
+<https://www.oxy.edu/student-life/student-affairs/faqs>, and Advising
+<https://www.oxy.edu/academics/academic-support/advising-center/student-res=
+ources>.
+Many of you may have specific questions that are related to your individual
+circumstances, and there are many offices and individuals who are able to
+help you think through the answers to these questions. You can reach out to
+your academic advisor, the Registrar=E2=80=99s Office
+<https://www.oxy.edu/academics/registrars-office>, the Dean of Students
+Office <https://www.oxy.edu/student-life/student-affairs/dean-students>, or
+the Advising Center
+<https://www.oxy.edu/academics/academic-support/advising-center>, to talk
+about your specific questions.
+
+
+For academic support and personal support we urge you to also look at
+the student
+success website <https://www.oxy.edu/academics/student-success> to find
+resources that will be helpful. As usual, Student Success Advisors from the
+Dean of Students office, Disability Services, Advising Center, and Dean of
+the College's Office are available if you have questions, so please feel
+free to reach out to Vivian Garay Santiago, Luci Masredjian, Mariam
+Ashchyan, Ed Johnson (all cc-ed here), or me if you would like to talk
+through resources and strategies for your success.
+
+
+For resources as you work on final essays and other writing tasks, the
+Writing Center will be open for drop-in sessions with peer Writing Advisers
+during our usual hours (Su-Th 4:00-10:00 pm) through 12/09. The Writing
+Center is located on the ground floor of the Academic Commons.. You can
+also schedule an in-person or Zoom appointment to work with a Faculty
+Writing Specialist (schedule through our website below). To access other
+resources asynchronously, please see the Writing Center website:
+https://www.oxy.edu/academics/student-success/writing-center. Join the
+Writing Center and peer subject tutoring on Monday, 12/06 for Donut Night
+outside the ground floor of the Academic Commons (starting at 7:00 pm until
+we run out!). Follow the Writing Center on instagram at oxywritingcenter
+for up-to-date information!
+
+
+Peer tutors will be continuing their drop-in hours through finals week, so
+be sure to utilize their support for your final projects and exams! Tutor
+schedules can be found here
+<https://www.oxy.edu/academics/student-success/peer-learning/subject-tutori=
+ng>
+.
+
+
+Finally, keep your eyes peeled for information in email today and over the
+next week for other opportunities to help you reduce stress during this
+time: SLICE will be offering a series of stress relieving events, Reset at
+De-Stress Week, during finals week, and ORSL will be hosting two study
+breaks during finals week complete with massages, arts and crafts and
+snacks. Advanced registration for massages is required, so check your email
+for the fliers to sign up!
+
+
+Wishing you the best for the finals week, and wishing you a restful and
+enjoyable winter break.
+
+
+Take care,
+
+Caro Brighouse
+
+Associate Dean for Student Academic Affairs
+
+
+--=20
+Carolyn Brighouse
+She/They
+Professor, Philosophy; Cognitive Science
+Associate Dean, Student Academic Affairs
+Occidental College
+Los Angeles CA 90041
+(323) 259 2588
+Johnson 111
+
+
+Resources for Student Success at Oxy
+<https://www.oxy.edu/academics/student-success>
+
+
+Office Hours
+
+Mondays: noon-1pm (Zoom, https://occidental.zoom.us/j/8366793791)
+
+Wednesdays: 4:00pm-5:30pm (in person, J111)
+
+Fridays: 4:30pm-5:30pm, (in person, J111)
+
+--000000000000a262be05d22be851
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><font face=3D"arial, sans-serif" color=3D"#000000"><span i=
+d=3D"gmail-docs-internal-guid-e4d056fd-7fff-fa1a-c82d-d891acc68db0"><p dir=
+=3D"ltr" style=3D"line-height:1.2;background-color:rgb(255,255,255);margin-=
+top:0pt;margin-bottom:0pt"><span style=3D"font-family:Arial;color:rgb(0,0,0=
+);background-color:transparent;font-weight:400;font-style:normal;font-varia=
+nt:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap=
+">Dear Oxy Students,</span></p><p dir=3D"ltr" style=3D"line-height:1.9872;m=
+argin-top:0pt;margin-bottom:0pt"><b style=3D"font-weight:normal" id=3D"gmai=
+l-docs-internal-guid-3708aa81-7fff-8fc0-0f63-3be0e419870a"><br></b></p><p d=
+ir=3D"ltr" style=3D"line-height:1.2;background-color:rgb(255,255,255);margi=
+n-top:0pt;margin-bottom:0pt"><span style=3D"font-family:Arial;color:rgb(0,0=
+,0);background-color:transparent;font-weight:400;font-style:normal;font-var=
+iant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wr=
+ap">As your classes come to a close this week and you prepare for your fina=
+l assignments and exams we wanted to reach out to make sure you know of the=
+ grading policies, the processes associated with those policies, and the re=
+sources that are available to support you through the next few weeks. This =
+semester has been fast paced and intense for you and for your instructors, =
+and we want to do all we can to support you through the home-stretch.=C2=A0=
+=C2=A0</span></p><p dir=3D"ltr" style=3D"line-height:1.9872;margin-top:0pt;=
+margin-bottom:0pt"><b style=3D"font-weight:normal"><br></b></p><p dir=3D"lt=
+r" style=3D"line-height:1.2;background-color:rgb(255,255,255);margin-top:0p=
+t;margin-bottom:0pt"><span style=3D"font-family:Arial;color:rgb(0,0,0);back=
+ground-color:transparent;font-weight:400;font-style:normal;font-variant:nor=
+mal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap">Facu=
+lty are being as flexible as they can be while maintaining what is essentia=
+l to the goals of their courses and the curriculum. The deadline for reques=
+ts to late drop (withdraw), receive an incomplete, or request the S/U grade=
+ mode for your courses is this Friday, December 3rd. You have received an e=
+mail from Jim Herr, Oxy=E2=80=99s Registrar, which describes these policies=
+ and the processes you need to follow, in detail. Please do read that email=
+ carefully.</span></p><p dir=3D"ltr" style=3D"line-height:1.9872;margin-top=
+:0pt;margin-bottom:0pt"><b style=3D"font-weight:normal"><br></b></p><p dir=
+=3D"ltr" style=3D"line-height:1.2;background-color:rgb(255,255,255);margin-=
+top:0pt;margin-bottom:0pt"><span style=3D"font-family:Arial;color:rgb(0,0,0=
+);background-color:transparent;font-weight:400;font-style:normal;font-varia=
+nt:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap=
+">We know that the end of a semester comes with an increase in stress, and =
+there are many resources available to help you if you have questions or do =
+not know where to turn. Answers to general questions about S/U and other en=
+d of semester policies can be found in the</span><a href=3D"https://oxy.sma=
+rtcatalogiq.com/en/2019-2020/Catalog" style=3D"text-decoration:none"><span =
+style=3D"font-family:Arial;color:rgb(0,0,0);background-color:transparent;fo=
+nt-weight:400;font-style:normal;font-variant:normal;text-decoration:none;ve=
+rtical-align:baseline;white-space:pre-wrap"> </span></a><a href=3D"https://=
+oxy.smartcatalogiq.com/2021-2022/Catalog" style=3D"text-decoration:none"><s=
+pan style=3D"font-family:Arial;color:rgb(17,85,204);background-color:transp=
+arent;font-weight:400;font-style:normal;font-variant:normal;text-decoration=
+:underline;vertical-align:baseline;white-space:pre-wrap">College Catalog</s=
+pan></a><span style=3D"font-family:Arial;color:rgb(0,0,0);background-color:=
+transparent;font-weight:400;font-style:normal;font-variant:normal;text-deco=
+ration:none;vertical-align:baseline;white-space:pre-wrap"> and various depa=
+rtment Frequently Asked Questions (FAQs) pages, including on the sites of t=
+he registrar=E2=80=99s </span><a href=3D"https://www.oxy.edu/academics/regi=
+strars-office/covid-19-related-policy-adjustments" style=3D"text-decoration=
+:none"><span style=3D"font-family:Arial;color:rgb(0,0,0);background-color:t=
+ransparent;font-weight:400;font-style:normal;font-variant:normal;text-decor=
+ation:underline;vertical-align:baseline;white-space:pre-wrap">COVID-19 rela=
+ted policy adjustments page</span></a><span style=3D"font-family:Arial;colo=
+r:rgb(0,0,0);background-color:transparent;font-weight:400;font-style:normal=
+;font-variant:normal;text-decoration:none;vertical-align:baseline;white-spa=
+ce:pre-wrap">, and pages of </span><a href=3D"https://www.oxy.edu/student-l=
+ife/student-affairs/faqs" style=3D"text-decoration:none"><span style=3D"fon=
+t-family:Arial;color:rgb(0,0,0);background-color:transparent;font-weight:40=
+0;font-style:normal;font-variant:normal;text-decoration:underline;vertical-=
+align:baseline;white-space:pre-wrap">Student Affairs</span></a><span style=
+=3D"font-family:Arial;color:rgb(0,0,0);background-color:transparent;font-we=
+ight:400;font-style:normal;font-variant:normal;text-decoration:none;vertica=
+l-align:baseline;white-space:pre-wrap">,</span><a href=3D"https://www.oxy.e=
+du/academics/academic-support/advising-center/student-resources" style=3D"t=
+ext-decoration:none"><span style=3D"font-family:Arial;color:rgb(0,0,0);back=
+ground-color:transparent;font-weight:400;font-style:normal;font-variant:nor=
+mal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap"> and=
+ </span><span style=3D"font-family:Arial;color:rgb(0,0,0);background-color:=
+transparent;font-weight:400;font-style:normal;font-variant:normal;text-deco=
+ration:underline;vertical-align:baseline;white-space:pre-wrap">Advising</sp=
+an></a><span style=3D"font-family:Arial;color:rgb(0,0,0);background-color:t=
+ransparent;font-weight:400;font-style:normal;font-variant:normal;text-decor=
+ation:none;vertical-align:baseline;white-space:pre-wrap">. Many of you may =
+have specific questions that are related to your individual circumstances, =
+and there are many offices and individuals who are able to help you think t=
+hrough the answers to these questions. You can reach out to your academic a=
+dvisor, the</span><a href=3D"https://www.oxy.edu/academics/registrars-offic=
+e" style=3D"text-decoration:none"><span style=3D"font-family:Arial;color:rg=
+b(0,0,0);background-color:transparent;font-weight:400;font-style:normal;fon=
+t-variant:normal;text-decoration:none;vertical-align:baseline;white-space:p=
+re-wrap"> </span><span style=3D"font-family:Arial;color:rgb(0,0,0);backgrou=
+nd-color:transparent;font-weight:400;font-style:normal;font-variant:normal;=
+text-decoration:underline;vertical-align:baseline;white-space:pre-wrap">Reg=
+istrar=E2=80=99s Office</span></a><span style=3D"font-family:Arial;color:rg=
+b(0,0,0);background-color:transparent;font-weight:400;font-style:normal;fon=
+t-variant:normal;text-decoration:none;vertical-align:baseline;white-space:p=
+re-wrap">, the</span><a href=3D"https://www.oxy.edu/student-life/student-af=
+fairs/dean-students" style=3D"text-decoration:none"><span style=3D"font-fam=
+ily:Arial;color:rgb(0,0,0);background-color:transparent;font-weight:400;fon=
+t-style:normal;font-variant:normal;text-decoration:none;vertical-align:base=
+line;white-space:pre-wrap"> </span><span style=3D"font-family:Arial;color:r=
+gb(0,0,0);background-color:transparent;font-weight:400;font-style:normal;fo=
+nt-variant:normal;text-decoration:underline;vertical-align:baseline;white-s=
+pace:pre-wrap">Dean of Students Office</span></a><span style=3D"font-family=
+:Arial;color:rgb(0,0,0);background-color:transparent;font-weight:400;font-s=
+tyle:normal;font-variant:normal;text-decoration:none;vertical-align:baselin=
+e;white-space:pre-wrap">, or the</span><a href=3D"https://www.oxy.edu/acade=
+mics/academic-support/advising-center" style=3D"text-decoration:none"><span=
+ style=3D"font-family:Arial;color:rgb(0,0,0);background-color:transparent;f=
+ont-weight:400;font-style:normal;font-variant:normal;text-decoration:none;v=
+ertical-align:baseline;white-space:pre-wrap"> </span><span style=3D"font-fa=
+mily:Arial;color:rgb(0,0,0);background-color:transparent;font-weight:400;fo=
+nt-style:normal;font-variant:normal;text-decoration:underline;vertical-alig=
+n:baseline;white-space:pre-wrap">Advising Center</span></a>,<span style=3D"=
+font-family:Arial;color:rgb(0,0,0);background-color:transparent;font-weight=
+:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-al=
+ign:baseline;white-space:pre-wrap"> to talk about your specific questions.=
+=C2=A0</span></p><p dir=3D"ltr" style=3D"line-height:1.9872;margin-top:0pt;=
+margin-bottom:0pt"><b style=3D"font-weight:normal"><br></b></p><p dir=3D"lt=
+r" style=3D"line-height:1.2;background-color:rgb(255,255,255);margin-top:0p=
+t;margin-bottom:0pt"><span style=3D"font-family:Arial;color:rgb(0,0,0);back=
+ground-color:transparent;font-weight:400;font-style:normal;font-variant:nor=
+mal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap">For =
+academic support and personal support we urge you to also look at the</span=
+><a href=3D"https://www.oxy.edu/academics/student-success" style=3D"text-de=
+coration:none"><span style=3D"font-family:Arial;color:rgb(0,0,0);background=
+-color:transparent;font-weight:400;font-style:normal;font-variant:normal;te=
+xt-decoration:none;vertical-align:baseline;white-space:pre-wrap"> </span><s=
+pan style=3D"font-family:Arial;color:rgb(0,0,0);background-color:transparen=
+t;font-weight:400;font-style:normal;font-variant:normal;text-decoration:und=
+erline;vertical-align:baseline;white-space:pre-wrap">student success websit=
+e</span></a><span style=3D"font-family:Arial;color:rgb(0,0,0);background-co=
+lor:transparent;font-weight:400;font-style:normal;font-variant:normal;text-=
+decoration:none;vertical-align:baseline;white-space:pre-wrap"> to find reso=
+urces that will be helpful. As usual, Student Success Advisors from the Dea=
+n of Students office, Disability Services, Advising Center, and Dean of the=
+ College&#39;s Office are available if you have questions, so please feel f=
+ree to reach out to Vivian Garay Santiago, Luci Masredjian, Mariam Ashchyan=
+, Ed Johnson (all cc-ed here), or me if you would like to talk through reso=
+urces and strategies for your success.=C2=A0</span></p><p dir=3D"ltr" style=
+=3D"line-height:1.9872;margin-top:0pt;margin-bottom:0pt"><b style=3D"font-w=
+eight:normal"><br></b></p><p dir=3D"ltr" style=3D"line-height:1.2;backgroun=
+d-color:rgb(255,255,255);margin-top:0pt;margin-bottom:0pt"><span style=3D"f=
+ont-family:Arial;color:rgb(0,0,0);background-color:transparent;font-weight:=
+400;font-style:normal;font-variant:normal;text-decoration:none;vertical-ali=
+gn:baseline;white-space:pre-wrap">For resources as you work on final essays=
+ and other writing tasks, the Writing Center will be open for drop-in sessi=
+ons with peer Writing Advisers during our usual hours (Su-Th 4:00-10:00 pm)=
+ through 12/09. The Writing Center is located on the ground floor of the Ac=
+ademic Commons.. You can also schedule an in-person or Zoom appointment to =
+work with a Faculty Writing Specialist (schedule through our website below)=
+. To access other resources asynchronously, please see the Writing Center w=
+ebsite:</span><a href=3D"https://www.oxy.edu/academics/student-success/writ=
+ing-center" style=3D"text-decoration:none"><span style=3D"font-family:Arial=
+;color:rgb(0,0,0);background-color:transparent;font-weight:400;font-style:n=
+ormal;font-variant:normal;text-decoration:none;vertical-align:baseline;whit=
+e-space:pre-wrap"> </span><span style=3D"font-family:Arial;color:rgb(17,85,=
+204);background-color:transparent;font-weight:400;font-style:normal;font-va=
+riant:normal;text-decoration:underline;vertical-align:baseline;white-space:=
+pre-wrap">https://www.oxy.edu/academics/student-success/writing-center</spa=
+n></a><span style=3D"font-family:Arial;color:rgb(0,0,0);background-color:tr=
+ansparent;font-weight:400;font-style:normal;font-variant:normal;text-decora=
+tion:none;vertical-align:baseline;white-space:pre-wrap">. Join the Writing =
+Center and peer subject tutoring on Monday, 12/06 for Donut Night outside t=
+he ground floor of the Academic Commons (starting at 7:00 pm until we run o=
+ut!). Follow the Writing Center on instagram at oxywritingcenter for up-to-=
+date information!</span></p><p dir=3D"ltr" style=3D"line-height:1.9872;marg=
+in-top:0pt;margin-bottom:0pt"><b style=3D"font-weight:normal"><br></b></p><=
+p dir=3D"ltr" style=3D"line-height:1.2;margin-top:0pt;margin-bottom:0pt"><s=
+pan style=3D"font-family:Arial;color:rgb(0,0,0);background-color:transparen=
+t;font-weight:400;font-style:normal;font-variant:normal;text-decoration:non=
+e;vertical-align:baseline;white-space:pre-wrap">Peer tutors will be continu=
+ing their drop-in hours through finals week, so be sure to utilize their su=
+pport for your final projects and exams! Tutor schedules can be found </spa=
+n><a href=3D"https://www.oxy.edu/academics/student-success/peer-learning/su=
+bject-tutoring" style=3D"text-decoration:none"><span style=3D"font-family:A=
+rial;color:rgb(17,85,204);background-color:transparent;font-weight:400;font=
+-style:normal;font-variant:normal;text-decoration:underline;vertical-align:=
+baseline;white-space:pre-wrap">here</span></a><span style=3D"font-family:Ar=
+ial;color:rgb(0,0,0);background-color:transparent;font-weight:400;font-styl=
+e:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;w=
+hite-space:pre-wrap">.</span></p><p dir=3D"ltr" style=3D"line-height:1.9872=
+;margin-top:0pt;margin-bottom:0pt"><b style=3D"font-weight:normal"><br></b>=
+</p><p dir=3D"ltr" style=3D"line-height:1.2;margin-top:0pt;margin-bottom:0p=
+t"><span style=3D"font-family:Arial;background-color:transparent;font-weigh=
+t:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-a=
+lign:baseline;white-space:pre-wrap">Finally, keep your eyes peeled for info=
+rmation in email today and over the next week for other opportunities to he=
+lp you reduce stress during this time: SLICE will be offering a series of s=
+tress relieving events, </span><span style=3D"font-family:Arial;background-=
+color:transparent;font-weight:400;font-style:normal;font-variant:normal;tex=
+t-decoration:none;vertical-align:baseline;white-space:pre-wrap">Reset at De=
+-Stress Week, during</span><span style=3D"font-family:Arial;background-colo=
+r:transparent;font-weight:400;font-style:normal;font-variant:normal;text-de=
+coration:none;vertical-align:baseline;white-space:pre-wrap"> finals week, a=
+nd ORSL will be hosting two study breaks during finals week complete with m=
+assages, arts and crafts and snacks.</span><span style=3D"font-family:Robot=
+o,sans-serif;background-color:rgb(255,255,255);font-weight:400;font-style:n=
+ormal;font-variant:normal;text-decoration:none;vertical-align:baseline;whit=
+e-space:pre-wrap"> Advanced registration for massages is required, so check=
+ your email for the fliers to sign up!</span></p><p dir=3D"ltr" style=3D"li=
+ne-height:1.9872;margin-top:0pt;margin-bottom:0pt"><b style=3D"font-weight:=
+normal"><br></b></p><p dir=3D"ltr" style=3D"line-height:1.2;background-colo=
+r:rgb(255,255,255);margin-top:0pt;margin-bottom:0pt"><span style=3D"font-fa=
+mily:Arial;color:rgb(0,0,0);background-color:transparent;font-weight:400;fo=
+nt-style:normal;font-variant:normal;text-decoration:none;vertical-align:bas=
+eline;white-space:pre-wrap">Wishing you the best for the finals week, and w=
+ishing you a restful and enjoyable winter break.</span></p><p dir=3D"ltr" s=
+tyle=3D"line-height:1.9872;margin-top:0pt;margin-bottom:0pt"><b style=3D"fo=
+nt-weight:normal"><br></b></p><p dir=3D"ltr" style=3D"line-height:1.2;backg=
+round-color:rgb(255,255,255);margin-top:0pt;margin-bottom:0pt"><span style=
+=3D"font-family:Arial;color:rgb(0,0,0);background-color:transparent;font-we=
+ight:400;font-style:normal;font-variant:normal;text-decoration:none;vertica=
+l-align:baseline;white-space:pre-wrap">Take care,</span></p><p dir=3D"ltr" =
+style=3D"line-height:1.2;background-color:rgb(255,255,255);margin-top:0pt;m=
+argin-bottom:0pt"><span style=3D"font-family:Arial;color:rgb(0,0,0);backgro=
+und-color:transparent;font-weight:400;font-style:normal;font-variant:normal=
+;text-decoration:none;vertical-align:baseline;white-space:pre-wrap">Caro Br=
+ighouse</span></p><p dir=3D"ltr" style=3D"line-height:1.2;background-color:=
+rgb(255,255,255);margin-top:0pt;margin-bottom:0pt"><span style=3D"font-fami=
+ly:Arial;color:rgb(0,0,0);background-color:transparent;font-weight:400;font=
+-style:normal;font-variant:normal;text-decoration:none;vertical-align:basel=
+ine;white-space:pre-wrap">Associate Dean for Student Academic Affairs</span=
+></p><p dir=3D"ltr" style=3D"line-height:1.9872;margin-top:0pt;margin-botto=
+m:0pt"><br class=3D"gmail-Apple-interchange-newline"></p></span></font>-- <=
+br><div dir=3D"ltr" class=3D"gmail_signature" data-smartmail=3D"gmail_signa=
+ture"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><=
+div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=
+=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr=
+"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div =
+dir=3D"ltr"><div dir=3D"ltr"><div style=3D"color:rgb(80,0,80);font-size:12.=
+8px">Carolyn Brighouse</div><div style=3D"color:rgb(80,0,80);font-size:12.8=
+px">She/They</div><div style=3D"color:rgb(80,0,80);font-size:12.8px">Profes=
+sor, Philosophy; Cognitive Science</div><div style=3D"color:rgb(80,0,80);fo=
+nt-size:12.8px">Associate Dean, Student Academic Affairs</div><div style=3D=
+"color:rgb(80,0,80);font-size:12.8px">Occidental College<br>Los Angeles CA =
+90041</div><div style=3D"color:rgb(80,0,80);font-size:12.8px">(323) 259 258=
+8</div><div style=3D"color:rgb(80,0,80);font-size:12.8px">Johnson 111</div>=
+<div style=3D"color:rgb(80,0,80);font-size:12.8px"><p dir=3D"ltr" style=3D"=
+font-size:small;line-height:1.38;margin-top:0pt;margin-bottom:0pt"><span st=
+yle=3D"font-family:&quot;Helvetica Neue&quot;,sans-serif;color:rgb(0,0,0);b=
+ackground-color:transparent;vertical-align:baseline;white-space:pre-wrap"><=
+br></span></p><p style=3D"font-size:small;line-height:1.38;margin-top:0pt;m=
+argin-bottom:0pt"><span style=3D"font-family:&quot;Helvetica Neue&quot;,san=
+s-serif;color:rgb(0,0,0);background-color:transparent;vertical-align:baseli=
+ne;white-space:pre-wrap"><a href=3D"https://www.oxy.edu/academics/student-s=
+uccess" target=3D"_blank">Resources for Student Success at Oxy</a></span></=
+p><p dir=3D"ltr" style=3D"font-size:small;line-height:1.38;margin-top:0pt;m=
+argin-bottom:0pt"><span style=3D"font-family:&quot;Helvetica Neue&quot;,san=
+s-serif;color:rgb(0,0,0);background-color:transparent;vertical-align:baseli=
+ne;white-space:pre-wrap"><br>Office Hours</span></p><p style=3D"font-size:s=
+mall;line-height:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"font=
+-family:&quot;Helvetica Neue&quot;,sans-serif;color:rgb(0,0,0);background-c=
+olor:transparent;vertical-align:baseline;white-space:pre-wrap">Mondays: noo=
+n-1pm (Zoom, </span><span style=3D"color:rgb(35,35,51);font-family:Lato,Hel=
+vetica,Arial;font-size:14px"><a href=3D"https://occidental.zoom.us/j/836679=
+3791" target=3D"_blank">https://occidental.zoom.us/j/8366793791</a></span><=
+span style=3D"background-color:transparent;color:rgb(0,0,0);font-family:&qu=
+ot;Helvetica Neue&quot;,sans-serif;white-space:pre-wrap">)</span></p><p sty=
+le=3D"font-size:small;line-height:1.38;margin-top:0pt;margin-bottom:0pt"><s=
+pan style=3D"color:rgb(60,64,67);font-family:Roboto,Arial,sans-serif;font-s=
+ize:14px;letter-spacing:0.2px;white-space:pre-wrap">Wednesdays: 4:00pm-5:30=
+pm (in person, J111)</span></p><p style=3D"font-size:small;line-height:1.38=
+;margin-top:0pt;margin-bottom:0pt"><span style=3D"color:rgb(60,64,67);font-=
+family:Roboto,Arial,sans-serif;font-size:14px;letter-spacing:0.2px;white-sp=
+ace:pre-wrap">Fridays: 4:30pm-5:30pm, (in person, J111)</span></p><p dir=3D=
+"ltr" style=3D"font-size:small;line-height:1.38;margin-top:0pt;margin-botto=
+m:0pt"><br></p></div><div style=3D"margin:0px 0px 28px;padding:0px;border:0=
+px;outline:0px;vertical-align:baseline;background-image:initial;background-=
+position:initial;background-repeat:initial"><div style=3D"margin:0px;paddin=
+g:0px;border:0px;outline:0px;vertical-align:baseline;background:transparent=
+"><div style=3D"margin:0px;padding:0px;border:0px;outline:0px;vertical-alig=
+n:baseline;background:transparent;display:inline-block"><div style=3D"margi=
+n:0px;padding:0px;border:0px;outline:0px;vertical-align:baseline;background=
+:transparent;line-height:21px"><div style=3D"color:rgb(51,51,51);font-famil=
+y:ProximaNovaLight;font-size:14px"><br></div></div></div></div></div><span =
+style=3D"color:rgb(0,0,0);font-family:&quot;Helvetica Neue&quot;,Arial,&quo=
+t;Liberation Sans&quot;,FreeSans,sans-serif;font-size:13px"></span></div></=
+div></div></div></div></div></div></div></div></div></div></div></div></div=
+></div></div></div></div></div></div></div>
+
+--000000000000a262be05d22be851--
+
+--===============7713041364954737263==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Oxy-students-l mailing list
+Oxy-students-l@oxy.edu
+http://mailman.oxy.edu/mailman/listinfo/oxy-students-l
+--===============7713041364954737263==--
+
+From 1718079128227997109@xxx Thu Dec 02 23:32:18 +0000 2021
+X-GM-THRID: 1718079128227997109
+X-Gmail-Labels: Inbox,Category Updates,Unread
+Delivered-To: kliu4@oxy.edu
+Received: by 2002:a59:6c5:0:b0:23d:dbfa:4662 with SMTP id 188csp63737vqg;
+        Thu, 2 Dec 2021 15:32:18 -0800 (PST)
+X-Received: by 2002:a05:6808:1389:: with SMTP id c9mr6931401oiw.55.1638487938231;
+        Thu, 02 Dec 2021 15:32:18 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1638487938; cv=none;
+        d=google.com; s=arc-20160816;
+        b=vF1hv2U92csDf2x8Ojn7IveBAIQcv31TcX4Ip02jeXLjHvp4nXsZlFJbpZzwCqLdFj
+         Soj/ICKCDdcWGcUAqswmzYvNaIxOClWrZNkQYpXtrp2DlQAOIJ4semdd8oUjy5B5jy+j
+         WaYyHjg6DA5AVt7WHCnsi9VIxkdXRc+vOi8Mc+mpVer1zmu71Axpv0VMNb5ZkZEFuDew
+         Yu5BiXR3+hyHVt/eCiObXgjDM1Fd+hvFS4xXdYTN27Vzm6x18JO+nZGWd+z9cv5AZToT
+         MGfApwLGrU2rrjh41PtMG9XbD8iGO6II4yCqKabN8wugUvfIrQAOjzA9fhSRu/cccsAG
+         PzNA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:from:subject:date:message-id:references:reply-to:mime-version
+         :dkim-signature;
+        bh=FI2WzJdcHsqrSbYlbLpQR3OZF+HU2D9HS42K6u37I3E=;
+        b=1INo38tiE05GbRbpm23gWGfwc3Bi1kjxQ83NUeXWHdD7h9j1Nnn9eCXnnxACFNyBay
+         0kXN+nifh1en4dNHS5RA/lP1TIjAZtEVeYynaPw02XHQGDw9a+jSmdU4wxDfoRWTqjap
+         qZ74gLDmzVMDv61XVeEith4KZXWApC8YYfm5mUceeVmNk9hgcaAMfBMwFf9rLcGyUqDv
+         4AUdnxciHTc4Pfu2Tb1tKKmtcEbbGe3WPNw3rBhS3I5Ba8wOzPG5bBD2avdaMYK9+C8t
+         kmI+53+++8oEmiDAy3LXQcr0l3yksjhVUU8v9L0cuYD3MmWRAlZDIOEqM6Df3fTrN1G3
+         tGHA==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@google.com header.s=20210112 header.b=KwSEaXd1;
+       spf=pass (google.com: domain of 3gvepyrckbegnbsfo-crkboc-nw-xybozviqyyqvo.mywuvseoyhi.one@doclist.bounces.google.com designates 209.85.220.69 as permitted sender) smtp.mailfrom=3gVepYRcKBegNbSfO-cRKbOc-NW-XYbOZViQYYQVO.MYWUVSeoYhi.ONe@doclist.bounces.google.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=google.com
+Return-Path: <3gVepYRcKBegNbSfO-cRKbOc-NW-XYbOZViQYYQVO.MYWUVSeoYhi.ONe@doclist.bounces.google.com>
+Received: from mail-sor-f69.google.com (mail-sor-f69.google.com. [209.85.220.69])
+        by mx.google.com with SMTPS id p13sor442372oip.76.2021.12.02.15.32.18
+        for <kliu4@oxy.edu>
+        (Google Transport Security);
+        Thu, 02 Dec 2021 15:32:18 -0800 (PST)
+Received-SPF: pass (google.com: domain of 3gvepyrckbegnbsfo-crkboc-nw-xybozviqyyqvo.mywuvseoyhi.one@doclist.bounces.google.com designates 209.85.220.69 as permitted sender) client-ip=209.85.220.69;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@google.com header.s=20210112 header.b=KwSEaXd1;
+       spf=pass (google.com: domain of 3gvepyrckbegnbsfo-crkboc-nw-xybozviqyyqvo.mywuvseoyhi.one@doclist.bounces.google.com designates 209.85.220.69 as permitted sender) smtp.mailfrom=3gVepYRcKBegNbSfO-cRKbOc-NW-XYbOZViQYYQVO.MYWUVSeoYhi.ONe@doclist.bounces.google.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=google.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=mime-version:reply-to:references:message-id:date:subject:from:to;
+        bh=FI2WzJdcHsqrSbYlbLpQR3OZF+HU2D9HS42K6u37I3E=;
+        b=KwSEaXd1iArs7zUpaDOUTRW1AkF5wMKqwJNSYEw0FNxf7/hOJN/lmnJUwRaRPAK3h9
+         svE64rNAQYlK/iRy9+3JhfSP1BYENjDbSp4tDoFONfJ4gghwftgYog/lL1mdBSZbeH5D
+         m/GeH3WckaEuVQdijXf3G8u0VtUB1IUDlbjFJW2bfTf6r9tiHvEGGqCeKlaRMoSa9KfQ
+         hXorqcrQHWbcCI0HSVZnOZyarQq+JoXpWE8WZbZK+I6NP8yOIdrRJyGi/R3JGaS+7PQD
+         TuW/I7NMPp4dobnwwomEQONRMeyEifwkZ1LOL4c0JTNRhF4mXKl0mTnAB41+eNE3ZSx+
+         OolA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:references:message-id:date
+         :subject:from:to;
+        bh=FI2WzJdcHsqrSbYlbLpQR3OZF+HU2D9HS42K6u37I3E=;
+        b=GqJNOJK1/W91zT20kM2PgTtoK8gPRxRXlwdk5i9RlSa4ic0tyziVSXCpV2jt8dcNR1
+         +aIsRuy/xL0z8xjFPguWd3Z+rdhcR4Jb7jd01pSrQwDRHx0CGTidqFdVWh/NO30FBvzS
+         CfCU4nyC5G+3pj4lZYNaZETjtWh2X4ZlU1ZUN4ljJ48x1laUmuikHfEyVSdpPCmWz60B
+         RvM2j6BmvcXe6TzTB3q3cmsntu3PlZzaLpvFJLcgmCBfMiYM6ovW0PqWinOiJPyAC3xK
+         n57ZT72tkt2i+3yDPDQIVBA7LcAZlbNOp0uK2Hp1s7pO/oqpW8bxLhWbKh/+3fPWS9Kz
+         9dHA==
+X-Gm-Message-State: AOAM530L7OGn1YIadWA4Plcwx0rwVTqSm7bhAJYb7rXFKzJUsP2h3E+w
+	ydx6r2+hT/hQ3RYdV0oMFEJqrx8q+x/urG8RCOz3mLXBvGrEK25b1R0cuXgLpl2EDMs6WD9NnjE
+	2722tlVy9X7UbpfIOFJlAPSh3LSfRIJQosefts5WHulvggkvbsGc19jqwaLdK2JS9SPKdFMigCR
+	zeNwo=
+X-Google-Smtp-Source: ABdhPJyqAUSC/2FiRiONNEss9JiXpqGPr9tT5UxDjqtGE1KYSCqY1VFMcKBViutjtupn5Grl3jWzddHPQTw=
+MIME-Version: 1.0
+X-Received: by 2002:a05:6808:14c4:: with SMTP id f4mr7020056oiw.76.1638487937972;
+ Thu, 02 Dec 2021 15:32:17 -0800 (PST)
+Reply-To: Jonah Winchell <jwinchell@oxy.edu>
+X-No-Auto-Attachment: 1
+References: <496263a4-65a9-4d1d-9a3e-83d46643986b@docs-share.google.com>
+Message-ID: <0000000000008317e205d23233af@google.com>
+Date: Thu, 02 Dec 2021 23:32:17 +0000
+Subject: Presentation shared with you: "OS Final Presentation"
+From: "Jonah Winchell (via Google Slides)" <drive-shares-dm-noreply@google.com>
+To: kliu4@oxy.edu
+Content-Type: multipart/alternative; boundary="0000000000008317ce05d23233ac"
+
+--0000000000008317ce05d23233ac
+Content-Type: text/plain; charset="UTF-8"; format=flowed; delsp=yes
+
+I've shared an item with you:
+
+OS Final Presentation
+https://docs.google.com/presentation/d/16iMWhidVfedItO8ArYijmDryY1yZIXIvrKmvFth0dgA/edit?usp=sharing&ts=61a95781
+
+It's not an attachment -- it's stored online. To open this item, just click
+the link above.
+
+
+--0000000000008317ce05d23233ac
+Content-Type: text/x-amp-html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<!doctype html><html amp4email><head><meta charset=3D"utf-8"><script async =
+src=3D"https://cdn.ampproject.org/v0.js"></script><script async custom-elem=
+ent=3D"amp-list" src=3D"https://cdn.ampproject.org/v0/amp-list-0.1.js"></sc=
+ript><script async custom-template=3D"amp-mustache" src=3D"https://cdn.ampp=
+roject.org/v0/amp-mustache-0.2.js"></script><script async custom-element=3D=
+"amp-form" src=3D"https://cdn.ampproject.org/v0/amp-form-0.1.js"></script><=
+script async custom-element=3D"amp-bind" src=3D"https://cdn.ampproject.org/=
+v0/amp-bind-0.1.js"></script><script async custom-element=3D"amp-timeago" s=
+rc=3D"https://cdn.ampproject.org/v0/amp-timeago-0.1.js"></script><style amp=
+4email-boilerplate>body{visibility:hidden}</style><style amp-custom>.materi=
+al-button{-webkit-appearance: none; cursor: pointer; outline: none;}.materi=
+al-button:focus {outline: 1px solid transparent;}.material-button:disabled{=
+cursor: initial; outline: none;}.material-button-filled{background-color: #=
+1a73e8; color: #fff;}.material-button-filled:hover{background-color: #1b55c=
+9; box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60,64,=
+67,0.15);}.material-button-filled:focus{background-color: #1b5fb9; box-shad=
+ow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60,64,67,0.15);}.=
+material-button-filled:active{background-color: #1b63c1; box-shadow: 0 1px =
+2px 0 rgba(60, 64, 67, 0.3), 0 2px 6px 2px rgba(60, 64, 67, 0.15);}.materia=
+l-button-filled:disabled{background-color: rgba(60, 64, 67, .12); color: rg=
+ba(60, 64, 67, .38);}.material-button-transparent{background-color: transpa=
+rent; color: #1a73e8;}.material-button-transparent:hover{background-color: =
+rgba(26, 115, 232, .04);}.material-button-transparent:focus{background-colo=
+r: rgba(26, 115, 232, .12);}.material-button-transparent:active{background-=
+color: rgba(26, 115, 232, .12); box-shadow: 0 1px 3px 1px rgba(60, 64, 67, =
+.15);}.material-button-transparent:disabled{background-color: transparent; =
+color: #3c4043; opacity: 0.38;}@media screen and (max-width: 600px){.conten=
+t-spacer{height: 24px;}.content-spacer-small{height: 12px;}}@media screen a=
+nd (min-width: 601px){.content-spacer{height: 32px;}.content-spacer-small{h=
+eight: 20px;}}.dynamic-content-container-wrapper {margin-left: -6px; table-=
+layout: fixed; width: calc(100% + 12px);}.dynamic-content-container-wrapper=
+ * {hyphens: auto; overflow-wrap: break-word; word-wrap: break-word; word-b=
+reak: break-word;}#dynamic-content-container, .thumbnail-link {border: 1px =
+solid #DADCE0; border-radius: 8px; box-sizing: border-box;}#dynamic-content=
+-container {display: inline-block; max-width: 100%; padding: 20px; width: 4=
+05px;}#dynamic-content-container > * + * {margin-top: 18px;}.dynamic-conten=
+t-heading {display: flex; flex-direction: row;}.dynamic-content-heading > *=
+ + * {margin-left: 10px;}#star-form, #star-button {height: 22px; position: =
+relative; width: 22px;}#star-button {background: none; border: none; displa=
+y: block; outline: none; z-index: 1;}#star-button[disabled] {opacity: 0.4;}=
+#star-button:not([disabled]) {cursor: pointer;}#star-button:not([disabled])=
+:hover + .star-button-circle, #star-button:not([disabled]):focus + .star-bu=
+tton-circle{display: block; outline: 1px solid transparent;}.star-button-ci=
+rcle {background-color: #F1F3F4; border-radius: 50%; display: none; height:=
+ 32px; left: 50%; position: absolute; top: 50%; transform: translate(-50%, =
+-50%); width: 32px;}.unstarred-icon, .starred-icon {bottom: 0; left: 0; pos=
+ition: absolute; right: 0; top: 0; visibility: hidden;}#star-button.starred=
+ > .starred-icon, #star-button.unstarred > .unstarred-icon {visibility: vis=
+ible;}#star-error-message {color: #D93025; font: 400 14px/16px Roboto, Aria=
+l, Helvetica, sans-serif; margin-top: 5px;}.display-none {display: none;}.t=
+humbnail-link {display: block; overflow: hidden; position: relative;}.thumb=
+nail-open {align-items: center; background-color: #202124; bottom: 0; color=
+: white; display: none; font: 400 14px/16px Google Sans, Roboto, Arial, Hel=
+vetica, sans-serif; justify-content: center; left: 0; letter-spacing: 0.15p=
+x; opacity: 65%; position: absolute; right: 0; top: 0; z-index: 1;}.thumbna=
+il-link:hover > .thumbnail-open, .thumbnail-link:focus > .thumbnail-open {d=
+isplay: flex;}amp-img.cover img {object-fit: cover; object-position: 0 0;}.=
+large-icon-container {align-items: center; display: flex; height: 100%; jus=
+tify-content: center;}.dynamic-message {align-items: center; display: flex;=
+ flex-direction: row;}.dynamic-message > amp-img {flex-shrink: 0;}.dynamic-=
+message > span {color: #5F6368; font: 400 14px/18px Roboto, Arial, Helvetic=
+a, sans-serif; letter-spacing: 0; margin-left: 18px;}.dynamic-message-summa=
+ry {margin-left: 16px; margin-top: 4px;}.blue-text-header {color: #1a73e8; =
+font-weight: 500;}.horizontal-rule-wrapper {margin-top: 16px;}#amp-timeago =
+{display: inline;}</style></head><body><amp-list diffable binding=3D"refres=
+h-evaluate" src=3D"https://drive.google.com/sharing/dynamicmail/fetchinvite=
+?ts=3D61a95781&amp;shareService=3Dpunch&amp;hl=3Den&amp;id=3D16iMWhidVfedIt=
+O8ArYijmDryY1yZIXIvrKmvFth0dgA&amp;dynamicEmailToken=3DAdlh7akmD81mNzGiOKIZ=
+vKdmCdtD72h1OgDQQ-o4L_TmUu6d3hud3MI5Id08If9cyBHepBuRjFexst3kXipHrsZJC7-gUwZ=
+v4u6BAEmKhBFyY-9scPAg09_53LVrs5dWKiG5HjVNKEnBaQ%3D%3D&amp;resourcekey&amp;b=
+uildLabel=3Ddrive.explorer_20211108.06_p2" single-item items=3D"." layout=
+=3D"container"><template type=3D"amp-mustache"><table style=3D"border-colla=
+pse: collapse; width: 100%; background-color: white; text-align: center;" r=
+ole=3D"presentation"><tr><td style=3D"padding: 24px 0 16px 0;"><table style=
+=3D"border-collapse: collapse;font-family: Roboto, Arial, Helvetica, sans-s=
+erif;hyphens: auto; overflow-wrap: break-word; word-wrap: break-word; word-=
+break: break-word;display: inline-block; width: 90%;max-width: 700px;min-wi=
+dth: 280px; text-align: left;" role=3D"presentation"><tr><td style=3D"paddi=
+ng: 0;"><table style=3D"width:100%; border: 1px solid #dadce0; border-radiu=
+s: 8px; border-spacing: 0; table-layout:fixed; border-collapse: separate;" =
+role=3D"presentation"><tr><td style=3D"padding: 4.5%;" dir=3D"ltr"><div sty=
+le=3D"margin-bottom:32px;font-family: Google Sans, Roboto, Arial, Helvetica=
+, sans-serif; font-style: normal; font-size: 28px; line-height: 36px; color=
+: #3c4043;"><a href=3D"mailto:jwinchell@oxy.edu" style=3D"color:inherit;tex=
+t-decoration:none">jwinchell@oxy.edu</a> shared a presentation</div><table =
+style=3D"border-collapse: collapse;font-family: Roboto, Arial, Helvetica, s=
+ans-serif; font-size:16px; line-height:24px; color:#202124; letter-spacing:=
+0.1px; table-layout:fixed; width:100%; overflow-wrap: break-word;" role=3D"=
+presentation"><tr><td style=3D"padding: 0; vertical-align:top; width:50px;"=
+><!--[if mso]><v:oval xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:w=3D"=
+urn:schemas-microsoft-com:office:word" style=3D"height:50px;width:50px;" fi=
+ll=3D"t" stroke=3D"f"><v:fill type=3D"frame" src=3D"https://ssl.gstatic.com=
+/s2/profiles/images/silhouette64.png" alt=3D"Unknown profile photo" style=
+=3D"height:50px;width:50px;"/></v:oval><![endif]--><div style=3D"mso-hide:a=
+ll;"><amp-img style=3D"border-radius:50%; display:block;" width=3D"50" heig=
+ht=3D"50" src=3D"https://ssl.gstatic.com/s2/profiles/images/silhouette64.pn=
+g" alt=3D"Unknown profile photo"></amp-img></div></td><td style=3D"padding:=
+ 0; vertical-align:top; padding-left:12px;"><div style=3D"padding-top:12px;=
+"><a href=3D"mailto:jwinchell@oxy.edu" style=3D"color:inherit;text-decorati=
+on:none">jwinchell@oxy.edu</a> has invited you to <b>edit</b> the following=
+ presentation:</div></td></tr></table><table class=3D"dynamic-content-conta=
+iner-wrapper" role=3D"presentation"><tr style=3D"height: 20px;"></tr><tr><t=
+d id=3D"dynamic-content-container" role=3D"presentation" tabindex=3D"0"><di=
+v class=3D"dynamic-content-heading"><a href=3D"https://docs.google.com/pres=
+entation/d/16iMWhidVfedItO8ArYijmDryY1yZIXIvrKmvFth0dgA/edit?usp=3Dsharing_=
+eil_dm&amp;ts=3D61a95781" target=3D"_blank" style=3D"color: #3c4043; displa=
+y: inline-block; max-width: 100%; text-decoration: none; vertical-align: to=
+p;display: flex; flex-direction: column; justify-content: center;"><div sty=
+le=3D"line-height: 18px; overflow: hidden; text-overflow: ellipsis;display:=
+ flex;"><span style=3D"display: inline-block; vertical-align: top; min-widt=
+h: 26px; width: 26px;"><amp-img src=3D"https://ssl.gstatic.com/docs/doclist=
+/images/mediatype/icon_1_presentation_x64.png" width=3D"18" height=3D"18" s=
+tyle=3D"vertical-align: top;" role=3D"presentation"></amp-img></span><span =
+style=3D"font: 500 14px/18px Google Sans, Roboto, Arial, Helvetica, sans-se=
+rif; display: inline; letter-spacing: 0.2px;">OS Final Presentation</span><=
+/div></a><form id=3D"star-form" action-xhr=3D"https://drive.google.com/shar=
+ing/dynamicmail/star?ts=3D61a95781&amp;shareService=3Dpunch&amp;hl=3Den&amp=
+;id=3D16iMWhidVfedItO8ArYijmDryY1yZIXIvrKmvFth0dgA&amp;dynamicEmailToken=3D=
+Adlh7akmD81mNzGiOKIZvKdmCdtD72h1OgDQQ-o4L_TmUu6d3hud3MI5Id08If9cyBHepBuRjFe=
+xst3kXipHrsZJC7-gUwZv4u6BAEmKhBFyY-9scPAg09_53LVrs5dWKiG5HjVNKEnBaQ%3D%3D&a=
+mp;resourcekey&amp;buildLabel=3Ddrive.explorer_20211108.06_p2" method=3D"po=
+st" on=3D"submit: dynamic-content-container.focus, AMP.setState({starButton=
+: {value: starButton =3D=3D null ? {{starredByRequester}} : starButton.valu=
+e, inProgress: true, error: false}}); submit-success: AMP.setState({starBut=
+ton: {value: !starButton.value, inProgress: false, error: false}}); submit-=
+error: AMP.setState({starButton: {inProgress: false, error: true}});"><inpu=
+t type=3D"hidden" name=3D"starred" value=3D"{{#starredByRequester}}false{{/=
+starredByRequester}}{{^starredByRequester}}true{{/starredByRequester}}" dat=
+a-amp-bind-value=3D"starButton.value ? 'false' : 'true'"><button id=3D"star=
+-button" class=3D"{{#starredByRequester}}starred{{/starredByRequester}}{{^s=
+tarredByRequester}}unstarred{{/starredByRequester}}" data-amp-bind-class=3D=
+"starButton.value ? 'starred' : 'unstarred'" type=3D"submit" aria-live=3D"p=
+olite" aria-label=3D"{{#starredByRequester}}Starred{{/starredByRequester}}{=
+{^starredByRequester}}Unstarred{{/starredByRequester}}" data-amp-bind-aria-=
+label=3D"starButton.value ? 'Starred' : 'Unstarred'" title=3D"Star in Drive=
+" data-amp-bind-disabled=3D"starButton.inProgress"><amp-img src=3D"https://=
+fonts.gstatic.com/s/i/googlematerialicons/star_border/v8/gm_grey-48dp/1x/gm=
+_star_border_gm_grey_48dp.png" layout=3D"fixed" width=3D"22" height=3D"22" =
+role=3D"presentation" aria-hidden=3D"true" class=3D"unstarred-icon"></amp-i=
+mg><amp-img src=3D"https://fonts.gstatic.com/s/i/googlematerialicons/star/v=
+8/gm_grey-48dp/1x/gm_star_gm_grey_48dp.png" layout=3D"fixed" width=3D"22" h=
+eight=3D"22" role=3D"presentation" aria-hidden=3D"true" class=3D"starred-ic=
+on"></amp-img></button><div class=3D"star-button-circle"></div></form></div=
+><div id=3D"star-error-message" class=3D"display-none" data-amp-bind-class=
+=3D"starButton.error ? '' : 'display-none'">Something went wrong. Try again=
+</div><a href=3D"https://docs.google.com/presentation/d/16iMWhidVfedItO8ArY=
+ijmDryY1yZIXIvrKmvFth0dgA/edit?usp=3Dsharing_eil_dm&amp;ts=3D61a95781" targ=
+et=3D"_blank" class=3D"thumbnail-link"><amp-layout layout=3D"responsive" wi=
+dth=3D"386" height=3D"202">{{#thumbnailUrl}}<amp-img class=3D"cover" src=3D=
+"{{thumbnailUrl}}" layout=3D"fill"><div class=3D"large-icon-container" fall=
+back><amp-img src=3D"https://drive-thirdparty.googleusercontent.com/256/typ=
+e/application/vnd.google-apps.presentation" width=3D"80" height=3D"80"></am=
+p-img></div></amp-img>{{/thumbnailUrl}}{{^thumbnailUrl}}<div class=3D"large=
+-icon-container"><amp-img src=3D"https://drive-thirdparty.googleusercontent=
+.com/256/type/application/vnd.google-apps.presentation" width=3D"80" height=
+=3D"80"></amp-img></div>{{/thumbnailUrl}}</amp-layout><div class=3D"thumbna=
+il-open">Open</div></a>{{#ownerOrCreatorMessage}}<div class=3D"dynamic-mess=
+age"><amp-img src=3D"https://www.gstatic.com/docs/documents/share/images/pe=
+rson.png" layout=3D"fixed" width=3D"16" height=3D"16" role=3D"presentation"=
+ aria-hidden=3D"true"></amp-img><span>{{ownerOrCreatorMessage}}</span></div=
+>{{/ownerOrCreatorMessage}}{{#lastEdited}}<div class=3D"dynamic-message"><a=
+mp-img src=3D"https://www.gstatic.com/docs/documents/share/images/clock.png=
+" layout=3D"fixed" width=3D"16" height=3D"16" role=3D"presentation" aria-hi=
+dden=3D"true"></amp-img><span>Last edited by {{lastEdited.editor}} <amp-tim=
+eago id=3D"amp-timeago" layout=3D"fixed-height" height=3D"1" datetime=3D"{{=
+lastEdited.datetime}}" locale=3D"en">{{lastEdited.datetime}}</amp-timeago><=
+/span></div>{{/lastEdited}}</td></tr></table><table style=3D"border-collaps=
+e: collapse;" role=3D"presentation"><tr style=3D"height: 32px"><td></td></t=
+r></table><div><a href=3D"https://docs.google.com/presentation/d/16iMWhidVf=
+edItO8ArYijmDryY1yZIXIvrKmvFth0dgA/edit?usp=3Dsharing_eip_dm&amp;ts=3D61a95=
+781" class=3D"material-button material-button-filled" target=3D"_blank" tab=
+index=3D"0" role=3D"button" style=3D"padding: 0 24px;font: 500 14px/36px Go=
+ogle Sans, Roboto, Arial, Helvetica, sans-serif; border: none; border-radiu=
+s: 18px; box-sizing: border-box; display: inline-block; letter-spacing: .25=
+px; min-height: 36px; text-align: center; text-decoration: none;">Open</a><=
+/div></td></tr></table><table style=3D"border-collapse: collapse; width: 10=
+0%;" role=3D"presentation"><tr><td style=3D"padding: 24px 4.5%"><table styl=
+e=3D"border-collapse: collapse; width: 100%;" dir=3D"ltr"><tr><td style=3D"=
+padding: 0;font-family: Roboto, Arial, Helvetica, sans-serif; color: #5F636=
+8; width: 100%; font-size: 12px; line-height: 16px; min-height: 40px; lette=
+r-spacing: .3px;">Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA =
+94043, USA<br/> You have received this email because <a href=3D"mailto:jwin=
+chell@oxy.edu" style=3D"color:inherit;text-decoration:none">jwinchell@oxy.e=
+du</a> shared a presentation with you from Google Slides.</td><td style=3D"=
+padding: 0; padding-left: 20px;"><a href=3D"https://workspace.google.com/" =
+target=3D"_blank"><amp-img src=3D"https://www.gstatic.com/docs/documents/sh=
+are/images/googleworkspace_logo_192x80.png" width=3D"96" height=3D"40" alt=
+=3D"Logo for Google Slides"></amp-img></a></td></tr></table></td></tr></tab=
+le></td></tr></table></td></tr></table></template><div role=3D"list"><table=
+ style=3D"border-collapse: collapse; width: 100%; background-color: white; =
+text-align: center;" role=3D"presentation"><tr><td style=3D"padding: 24px 0=
+ 16px 0;"><table style=3D"border-collapse: collapse;font-family: Roboto, Ar=
+ial, Helvetica, sans-serif;hyphens: auto; overflow-wrap: break-word; word-w=
+rap: break-word; word-break: break-word;display: inline-block; width: 90%;m=
+ax-width: 700px;min-width: 280px; text-align: left;" role=3D"presentation">=
+<tr><td style=3D"padding: 0;"><table style=3D"width:100%; border: 1px solid=
+ #dadce0; border-radius: 8px; border-spacing: 0; table-layout:fixed; border=
+-collapse: separate;" role=3D"presentation"><tr><td style=3D"padding: 4.5%;=
+" dir=3D"ltr"><div style=3D"margin-bottom:32px;font-family: Google Sans, Ro=
+boto, Arial, Helvetica, sans-serif; font-style: normal; font-size: 28px; li=
+ne-height: 36px; color: #3c4043;"><a href=3D"mailto:jwinchell@oxy.edu" styl=
+e=3D"color:inherit;text-decoration:none">jwinchell@oxy.edu</a> shared a pre=
+sentation</div><table style=3D"border-collapse: collapse;font-family: Robot=
+o, Arial, Helvetica, sans-serif; font-size:16px; line-height:24px; color:#2=
+02124; letter-spacing:0.1px; table-layout:fixed; width:100%; overflow-wrap:=
+ break-word;" role=3D"presentation"><tr><td style=3D"padding: 0; vertical-a=
+lign:top; width:50px;"><!--[if mso]><v:oval xmlns:v=3D"urn:schemas-microsof=
+t-com:vml" xmlns:w=3D"urn:schemas-microsoft-com:office:word" style=3D"heigh=
+t:50px;width:50px;" fill=3D"t" stroke=3D"f"><v:fill type=3D"frame" src=3D"h=
+ttps://ssl.gstatic.com/s2/profiles/images/silhouette64.png" alt=3D"Unknown =
+profile photo" style=3D"height:50px;width:50px;"/></v:oval><![endif]--><div=
+ style=3D"mso-hide:all;"><amp-img style=3D"border-radius:50%; display:block=
+;" width=3D"50" height=3D"50" src=3D"https://ssl.gstatic.com/s2/profiles/im=
+ages/silhouette64.png" alt=3D"Unknown profile photo"></amp-img></div></td><=
+td style=3D"padding: 0; vertical-align:top; padding-left:12px;"><div style=
+=3D"padding-top:12px;"><a href=3D"mailto:jwinchell@oxy.edu" style=3D"color:=
+inherit;text-decoration:none">jwinchell@oxy.edu</a> has invited you to <b>e=
+dit</b> the following presentation:</div></td></tr></table><table style=3D"=
+border-spacing:0 4px; table-layout:fixed; width:100%; overflow-wrap: break-=
+word;" role=3D"presentation"><tr style=3D"height:28px;"></tr><tr><td style=
+=3D"padding: 0;"><a href=3D"https://docs.google.com/presentation/d/16iMWhid=
+VfedItO8ArYijmDryY1yZIXIvrKmvFth0dgA/edit?usp=3Dsharing_eil_dm&amp;ts=3D61a=
+95781" target=3D"_blank" style=3D"color: #3c4043; display: inline-block; ma=
+x-width: 100%; text-decoration: none; vertical-align: top;border: 1px solid=
+ #DADCE0; border-radius: 16px; white-space: nowrap;"><div style=3D"line-hei=
+ght: 18px; overflow: hidden; text-overflow: ellipsis;padding: 6px 12px;"><s=
+pan style=3D"display: inline-block; vertical-align: top; min-width: 26px; w=
+idth: 26px;"><amp-img src=3D"https://ssl.gstatic.com/docs/doclist/images/me=
+diatype/icon_1_presentation_x64.png" width=3D"18" height=3D"18" style=3D"ve=
+rtical-align: top;" role=3D"presentation"></amp-img></span><span style=3D"f=
+ont: 500 14px/18px Google Sans, Roboto, Arial, Helvetica, sans-serif; displ=
+ay: inline; letter-spacing: 0.2px;">OS Final Presentation</span></div></a><=
+/td></tr></table><table style=3D"border-collapse: collapse;" role=3D"presen=
+tation"><tr style=3D"height: 32px"><td></td></tr></table><div><a href=3D"ht=
+tps://docs.google.com/presentation/d/16iMWhidVfedItO8ArYijmDryY1yZIXIvrKmvF=
+th0dgA/edit?usp=3Dsharing_eip_dm&amp;ts=3D61a95781" class=3D"material-butto=
+n material-button-filled" target=3D"_blank" tabindex=3D"0" role=3D"button" =
+style=3D"padding: 0 24px;font: 500 14px/36px Google Sans, Roboto, Arial, He=
+lvetica, sans-serif; border: none; border-radius: 18px; box-sizing: border-=
+box; display: inline-block; letter-spacing: .25px; min-height: 36px; text-a=
+lign: center; text-decoration: none;">Open</a></div></td></tr></table><tabl=
+e style=3D"border-collapse: collapse; width: 100%;" role=3D"presentation"><=
+tr><td style=3D"padding: 24px 4.5%"><table style=3D"border-collapse: collap=
+se; width: 100%;" dir=3D"ltr"><tr><td style=3D"padding: 0;font-family: Robo=
+to, Arial, Helvetica, sans-serif; color: #5F6368; width: 100%; font-size: 1=
+2px; line-height: 16px; min-height: 40px; letter-spacing: .3px;">Google LLC=
+, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA<br/> You have rec=
+eived this email because <a href=3D"mailto:jwinchell@oxy.edu" style=3D"colo=
+r:inherit;text-decoration:none">jwinchell@oxy.edu</a> shared a presentation=
+ with you from Google Slides.</td><td style=3D"padding: 0; padding-left: 20=
+px;"><a href=3D"https://workspace.google.com/" target=3D"_blank"><amp-img s=
+rc=3D"https://www.gstatic.com/docs/documents/share/images/googleworkspace_l=
+ogo_192x80.png" width=3D"96" height=3D"40" alt=3D"Logo for Google Slides"><=
+/amp-img></a></td></tr></table></td></tr></table></td></tr></table></td></t=
+r></table></div></amp-list></body></html>
+--0000000000008317ce05d23233ac
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<html><head></head><body><table style=3D"border-collapse: collapse; width: =
+100%; background-color: white; text-align: center;" role=3D"presentation"><=
+tr><td style=3D"padding: 24px 0 16px 0;"><table style=3D"border-collapse: c=
+ollapse;font-family: Roboto, Arial, Helvetica, sans-serif;hyphens: auto; ov=
+erflow-wrap: break-word; word-wrap: break-word; word-break: break-word;disp=
+lay: inline-block; width: 90%;max-width: 700px;min-width: 280px; text-align=
+: left;" role=3D"presentation"><tr><td style=3D"padding: 0;"><table style=
+=3D"width:100%; border: 1px solid #dadce0; border-radius: 8px; border-spaci=
+ng: 0; table-layout:fixed; border-collapse: separate;" role=3D"presentation=
+"><tr><td style=3D"padding: 4.5%;" dir=3D"ltr"><div style=3D"margin-bottom:=
+32px;font-family: Google Sans, Roboto, Arial, Helvetica, sans-serif; font-s=
+tyle: normal; font-size: 28px; line-height: 36px; color: #3c4043;"><a href=
+=3D"mailto:jwinchell@oxy.edu" style=3D"color:inherit;text-decoration:none">=
+jwinchell@oxy.edu</a> shared a presentation</div><table style=3D"border-col=
+lapse: collapse;font-family: Roboto, Arial, Helvetica, sans-serif; font-siz=
+e:16px; line-height:24px; color:#202124; letter-spacing:0.1px; table-layout=
+:fixed; width:100%; overflow-wrap: break-word;" role=3D"presentation"><tr><=
+td style=3D"padding: 0; vertical-align:top; width:50px;"><!--[if mso]><v:ov=
+al xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:w=3D"urn:schemas-microso=
+ft-com:office:word" style=3D"height:50px;width:50px;" fill=3D"t" stroke=3D"=
+f"><v:fill type=3D"frame" src=3D"https://ssl.gstatic.com/s2/profiles/images=
+/silhouette64.png" alt=3D"Unknown profile photo" style=3D"height:50px;width=
+:50px;"/></v:oval><![endif]--><div style=3D"mso-hide:all;"><img style=3D"bo=
+rder-radius:50%; display:block;" width=3D"50" height=3D"50" src=3D"https://=
+ssl.gstatic.com/s2/profiles/images/silhouette64.png" alt=3D"Unknown profile=
+ photo"></div></td><td style=3D"padding: 0; vertical-align:top; padding-lef=
+t:12px;"><div style=3D"padding-top:12px;"><a href=3D"mailto:jwinchell@oxy.e=
+du" style=3D"color:inherit;text-decoration:none">jwinchell@oxy.edu</a> has =
+invited you to <b>edit</b> the following presentation:</div></td></tr></tab=
+le><table style=3D"border-spacing:0 4px; table-layout:fixed; width:100%; ov=
+erflow-wrap: break-word;" role=3D"presentation"><tr style=3D"height:28px;">=
+</tr><tr><td style=3D"padding: 0;"><a href=3D"https://docs.google.com/prese=
+ntation/d/16iMWhidVfedItO8ArYijmDryY1yZIXIvrKmvFth0dgA/edit?usp=3Dsharing_e=
+il_m&amp;ts=3D61a95781" target=3D"_blank" style=3D"color: #3c4043; display:=
+ inline-block; max-width: 100%; text-decoration: none; vertical-align: top;=
+border: 1px solid #DADCE0; border-radius: 16px; white-space: nowrap;"><div =
+style=3D"line-height: 18px; overflow: hidden; text-overflow: ellipsis;paddi=
+ng: 6px 12px;"><span style=3D"display: inline-block; vertical-align: top; m=
+in-width: 26px; width: 26px;"><img src=3D"https://ssl.gstatic.com/docs/docl=
+ist/images/mediatype/icon_1_presentation_x64.png" width=3D"18" height=3D"18=
+" style=3D"vertical-align: top;" role=3D"presentation"></span><span style=
+=3D"font: 500 14px/18px Google Sans, Roboto, Arial, Helvetica, sans-serif; =
+display: inline; letter-spacing: 0.2px;">OS Final Presentation</span></div>=
+</a></td></tr></table><table style=3D"border-collapse: collapse;" role=3D"p=
+resentation"><tr style=3D"height: 32px"><td></td></tr></table><div><!--[if =
+mso]><v:roundrect xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:w=3D"urn:=
+schemas-microsoft-com:office:word" href=3D"https://docs.google.com/presenta=
+tion/d/16iMWhidVfedItO8ArYijmDryY1yZIXIvrKmvFth0dgA/edit?usp=3Dsharing_eip_=
+m&amp;ts=3D61a95781" style=3D"height:36px;v-text-anchor:middle;width:100px;=
+" arcsize=3D"50%" stroke=3D"f" fillcolor=3D"#1a73e8"><w:anchorlock/><center=
+ style=3D"color:#ffffff;font-family:Arial,Helvetica,sans-serif;font-weight:=
+500;font-size:14px;">Open</center></v:roundrect><![endif]--><a href=3D"http=
+s://docs.google.com/presentation/d/16iMWhidVfedItO8ArYijmDryY1yZIXIvrKmvFth=
+0dgA/edit?usp=3Dsharing_eip_m&amp;ts=3D61a95781" class=3D"material-button m=
+aterial-button-filled" target=3D"_blank" tabindex=3D"0" role=3D"button" sty=
+le=3D"mso-hide:all;padding: 0 24px;font: 500 14px/36px Google Sans, Roboto,=
+ Arial, Helvetica, sans-serif; border: none; border-radius: 18px; box-sizin=
+g: border-box; display: inline-block; letter-spacing: .25px; min-height: 36=
+px; text-align: center; text-decoration: none;background-color: #1a73e8; co=
+lor: #fff; cursor: pointer;">Open</a></div></td></tr></table><table style=
+=3D"border-collapse: collapse; width: 100%;" role=3D"presentation"><tr><td =
+style=3D"padding: 24px 4.5%"><table style=3D"border-collapse: collapse; wid=
+th: 100%;" dir=3D"ltr"><tr><td style=3D"padding: 0;font-family: Roboto, Ari=
+al, Helvetica, sans-serif; color: #5F6368; width: 100%; font-size: 12px; li=
+ne-height: 16px; min-height: 40px; letter-spacing: .3px;">Google LLC, 1600 =
+Amphitheatre Parkway, Mountain View, CA 94043, USA<br/> You have received t=
+his email because <a href=3D"mailto:jwinchell@oxy.edu" style=3D"color:inher=
+it;text-decoration:none">jwinchell@oxy.edu</a> shared a presentation with y=
+ou from Google Slides.</td><td style=3D"padding: 0; padding-left: 20px;"><a=
+ href=3D"https://workspace.google.com/" target=3D"_blank"><img src=3D"https=
+://www.gstatic.com/docs/documents/share/images/googleworkspace_logo_192x80.=
+png" width=3D"96" height=3D"40" alt=3D"Logo for Google Slides"></a></td></t=
+r></table></td></tr></table></td></tr></table></td></tr></table></body></ht=
+ml>
+--0000000000008317ce05d23233ac--
