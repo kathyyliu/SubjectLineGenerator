@@ -1,17 +1,13 @@
 import re
-import os
 import json
 import nltk
-from datetime import datetime
 import multiprocessing
-from email.parser import BytesParser
+from mailbox import mbox
+from datetime import datetime
 from nltk.tokenize import word_tokenize, sent_tokenize
 
 """
 Tokenizing emails for use in our Subject Line Generator.
-    TO DO:
-    - sent_tokenize instead of word_tokenize
-    - ensure proper punctuation inclusion/exclusion
 """
 
 Q = None
@@ -59,76 +55,29 @@ def tokenize(sentences=None, sentence=None):
             final.append(s)
     else:
         # If incorrect input was given
-        print("Must call tokenize() with either string or list of strings, not both")
+        print("\n\n\nError: Must call tokenize() with either string or list of strings, not both")
+        print(f"{sentence}\n{sentences}")
+        exit(1)
     return final
 
 
-def main():
-    global POOL, Q
-    path = './EmailSampleData/'
-    final_json = {"emails": []}
-    subject_lines = {}
-    bodies = {}
-    id = 0
-    # tuples blueprint: ({[tokenized subject]}, [[list], [of], [tokenized], [body], [sentences]]])
-    # Subject is always assumed to be just one sentence
-    # "final_json['emails']" will be list of tuples, one per email
+def get_charsets(msg):
+    """Keep track of possible charsets used for encoding"""
+    charsets = set({})
+    for c in msg.get_charsets():
+        if c is not None:
+            charsets.update([c])
+    return charsets
 
-    for f in os.listdir(path):
-        with open(path + f, 'rb') as file:
-            # Parse subject lines
-            header = BytesParser().parse(file)
-            subject = header['subject']
-            subject = subject.replace('\n\t', ' ').lower()
-            subject_lines[f"{id}"] = subject
 
-            # Very convoluted way to parse body text
-            payload = header.get_payload()[0]
-            if not isinstance(payload, str):
-                message = payload.as_string()
-            else:
-                message = payload
-            body = ''
-            for line in message.split('\n'):
-                # This is where blind trust comes into play
-                skip = False
-                if re.compile(r'^[--0]|^[Content\-Type]|=').match(line):
-                    skip = True
-                if re.compile(r'^<').match(line):
-                    break
-                if not skip:
-                    body = body + f" {line}\n"
-            bodies[f"{id}"] = body
-        id += 1
-
-    i = 0
-    start = datetime.now()
-    length = len(subject_lines.keys())
-    for x in subject_lines.keys():
-        # Generate the tokenized lists with multiprocessing
-        a = subject_lines[f"{x}"]
-        b = bodies[f"{x}"].split('. ')
-        POOL.apply(t, (a, b))
-        i += 1
-        stats(length, start, i, 'Creating processes...     ')
-
-    i = 0
-    start = datetime.now()
-    while True:
-        output = Q.get()
-        if output[0] is not None and output[1] is not None:
-            final_json['emails'].append(output)
-            i += 1
-            stats(length, start, i, 'Finishing processes...      ')
-        if i % 50 == 0:
-            with open('data.json', 'w') as save_file:
-                json.dump(final_json, save_file, indent=4)
-        if i == length:
-            break
-    print(f'Data has been generated and saved')
-    with open("data.json", "w") as save_file:
-        json.dump(final_json, save_file, indent=4)
-    return
+def get_body(msg):
+    """Parse an email for its body text"""
+    while msg.is_multipart():
+        msg = msg.get_payload()[0]
+    b = msg.get_payload(decode=True)
+    for charset in get_charsets(msg):
+        b = b.decode(charset)
+    return b
 
 
 def t(a, b):
@@ -139,7 +88,7 @@ def t(a, b):
 
 
 def stats(length, start, i, message):
-    """Display process statistics."""
+    """Display runtime statistics"""
     ave_time = (datetime.now() - start).seconds / i
     minutes_left = int(((length - i) * ave_time) / 60)
     if minutes_left > 0:
@@ -154,13 +103,80 @@ def stats(length, start, i, message):
 
 
 def setup():
-    """Initialize starting values and global variables."""
+    """Initialize starting values and global variables"""
     global Q, POOL
     multiprocessing.set_start_method('fork')
     Q = multiprocessing.Manager().Queue()
     POOL = multiprocessing.Pool(6)
     nltk.download('averaged_perceptron_tagger')
     nltk.download('tagsets')
+
+
+def main():
+    global POOL, Q
+    mb = mbox('emails.mbox')
+    final_json = {"emails": []}
+    subject_lines = {}
+    bodies = {}
+    id = 0
+    # tuples blueprint: ({[tokenized subject]}, [[list], [of], [tokenized], [body], [sentences]]])
+    # Subject is always assumed to be just one sentence
+    # "final_json['emails']" will be list of tuples, one per email
+
+    # Parse for subject lines and email bodies
+    for message in mb:
+        dmessage = dict(message.items())
+        subject = dmessage['Subject']
+        body = get_body(message)
+        subject_lines[f"{id}"] = subject
+        bodies[f"{id}"] = body
+        id += 1
+
+    i = 0
+    start = datetime.now()
+    length = len(subject_lines.keys())
+    for x in subject_lines.keys():
+        # Generate the tokenized lists with multiprocessing
+        a = subject_lines[f"{x}"]
+        b = []
+        try:
+            b = sent_tokenize(bodies[f"{x}"])
+        except Exception:
+            print(bodies[f"{x}"])
+        new_b = []
+
+        # Get rid of whitespace and random characters
+        for m in b:
+            new_m = re.sub(r"[\n]|[\s ]+", " ", m).lower()
+            new_m = re.sub(r"[<]|[>]|[*]", "", new_m)
+            new_b.append(new_m)
+
+        # Stopgap measure for weird bug
+        if not len(new_b) > 1:
+            new_b.append(" ")
+
+        POOL.apply(t, (a, new_b))
+        i += 1
+        stats(length, start, i, 'Creating processes...     ')
+
+    i = 0
+    start = datetime.now()
+    while True:
+        # Accrue output data and save periodically
+        output = Q.get()
+        if output[0] is not None and output[1] is not None:
+            final_json['emails'].append(output)
+            i += 1
+            stats(length, start, i, 'Finishing processes...      ')
+        if i % 50 == 0:
+            with open('data.json', 'w') as save_file:
+                json.dump(final_json, save_file, indent=4)
+        if i == length:
+            break
+    print(f'Data has been generated and saved')
+    with open("data.json", "w") as save_file:
+        json.dump(final_json, save_file, indent=4)
+    return
 
 
 if __name__ == '__main__':
