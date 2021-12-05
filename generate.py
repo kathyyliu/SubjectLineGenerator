@@ -33,7 +33,7 @@ def tokenize(sentences=None, sentence=None):
                 except IndexError:
                     pass
             # Split into individual sentences
-            new_sentences1 = s1.split('. ')
+            new_sentences1 = s1.split('. ')  # Maybe change to sent_tokenize?
             for s in new_sentences1:
                 tokens1 = word_tokenize(s)
                 for tok in tokens1:
@@ -76,7 +76,10 @@ def get_body(msg):
         msg = msg.get_payload()[0]
     b = msg.get_payload(decode=True)
     for charset in get_charsets(msg):
-        b = b.decode(charset)
+        try:
+            b = b.decode(charset)
+        except UnicodeDecodeError as e:
+            pass
     return b
 
 
@@ -114,10 +117,12 @@ def setup():
 
 def main():
     global POOL, Q
-    mb = mbox('Opened-002.mbox')
+    mb = mbox('data/Opened-002.mbox')
     final_json = {"emails": []}
     subject_lines = {}
     bodies = {}
+    start = datetime.now()
+    length = len(list(mb.iteritems()))
     id = 0
     # tuples blueprint: ({[tokenized subject]}, [[list], [of], [tokenized], [body], [sentences]]])
     # Subject is always assumed to be just one sentence
@@ -131,8 +136,10 @@ def main():
         subject_lines[f"{id}"] = subject
         bodies[f"{id}"] = body
         id += 1
+        stats(length, start, id, "Reading files...             ")
 
     i = 0
+    e = 0
     start = datetime.now()
     length = len(subject_lines.keys())
     for x in subject_lines.keys():
@@ -142,7 +149,7 @@ def main():
         try:
             b = sent_tokenize(bodies[f"{x}"])
         except Exception:
-            print(bodies[f"{x}"])
+            pass
         new_b = []
 
         # Get rid of whitespace and random characters
@@ -154,8 +161,9 @@ def main():
         # Stopgap measure for weird bug
         if not len(new_b) > 1:
             new_b.append(" ")
-
-        POOL.apply(t, (a, new_b))
+        if a and b:
+            POOL.apply(t, (a, new_b))
+            e += 1
         i += 1
         stats(length, start, i, 'Creating processes...     ')
 
@@ -171,7 +179,7 @@ def main():
         if i % 50 == 0:
             with open('data.json', 'w') as save_file:
                 json.dump(final_json, save_file, indent=4)
-        if i == length:
+        if i == e:
             break
     print(f'Data has been generated and saved')
     with open("data.json", "w") as save_file:
