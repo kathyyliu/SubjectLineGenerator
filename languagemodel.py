@@ -64,7 +64,10 @@ def generate(model):
         x = input("Input the email body or 'exit' to exit:")
         if x == 'exit':
             break
-        sents = sent_tokenize(input)
+        sents = sent_tokenize(x)
+        if len(sents) < 5:
+            print("Sorry! Email is too short.")
+            continue
         body = []
         # sent and word tokenize input
         for sent in sents:
@@ -90,20 +93,21 @@ def generate(model):
 
 
 def main():
-    os.environ["TOKENIZERS_PARALLELISM"] = "False"
-    detokenize = TreebankWordDetokenizer().detokenize
-    # read in all subject lines
-    f = open('smalldata.json', )
-    data = json.load(f)['emails']
-    subject_lines = []
-    for email in data:
-        if email[0][0] and len(email[0][0]) > 4:
-            subject_lines.append(email[0][0])
-    # label subject lines with their key words
-    df = label(subject_lines)
-    # train model
-    model = train(df)
-    generate(model)
+    # os.environ["TOKENIZERS_PARALLELISM"] = "False"
+    # detokenize = TreebankWordDetokenizer().detokenize
+    # # read in all subject lines
+    # f = open('smalldata.json', )
+    # data = json.load(f)['emails']
+    # subject_lines = []
+    # for email in data:
+    #     if email[0][0] and len(email[0][0]) > 4:
+    #         subject_lines.append(email[0][0])
+    # # label subject lines with their key words
+    # df = label(subject_lines)
+    # # train model
+    # model = train(df)
+    # generate(model)
+    generate(' ')
 
 
 if __name__ == '__main__':
