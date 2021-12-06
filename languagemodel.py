@@ -61,11 +61,11 @@ def train(labeled_data):
 def generate(model):
     # generate subject line with model
     while True:
-        x = input("Input the email body or 'exit' to exit:")
+        x = input("Input the email body or 'exit' to exit:\n")
         if x == 'exit':
             break
         sents = sent_tokenize(x)
-        if len(sents) < 5:
+        if len(sents) < 6:
             print("Sorry! Email is too short.")
             continue
         body = []

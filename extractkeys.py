@@ -23,7 +23,7 @@ def embedding(data, verbose=False):
     for i in range(len(tagged_data)):
         vectors.append(model.dv[i])
     # k = len(data) // 2      # num clusters
-    k = 3
+    k = 4
     mb = 10 * k             # num mini batches
     # cluster embeddings with k-means
     kmeans = MiniBatchKMeans(n_clusters=k, batch_size=mb).fit(vectors)
