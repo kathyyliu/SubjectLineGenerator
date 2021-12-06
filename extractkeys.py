@@ -22,7 +22,7 @@ def embedding(data, verbose=False):
     vectors = []
     for i in range(len(tagged_data)):
         vectors.append(model.dv[i])
-    # k = len(data) // 2      # num clusters TODO: find optimal k for given email length
+    # k = len(data) // 2      # num clusters
     k = 4
     mb = 10 * k             # num mini batches
     # cluster embeddings with k-means
@@ -41,7 +41,6 @@ def embedding(data, verbose=False):
     silhouette_values = []
     for i in range(k):
         cluster_silhouette_values = sample_silhouette_values[kmeans.labels_ == i]
-        # FIXME: mean of empty cluster error sometimes
         silhouette_values.append(
             (i,
             cluster_silhouette_values.shape[0],
@@ -110,6 +109,7 @@ def head(sentence, verbose=False):
             return [token] + children
 
 
+# Use rake alg to find key phrases of given sent
 def rake(sent):
     rake = Rake()
     if not isinstance(sent, str):
