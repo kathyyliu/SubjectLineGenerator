@@ -1,192 +1,90 @@
-import re
-import json
-import nltk
-import multiprocessing
-from mailbox import mbox
-from datetime import datetime
+import extractkeys
 from nltk.tokenize import word_tokenize, sent_tokenize
-
-"""
-Tokenizing emails for use in our Subject Line Generator.
-"""
-
-Q = None
-POOL = None
+from nltk.tokenize.treebank import TreebankWordDetokenizer
+from sklearn.model_selection import train_test_split
+from keytotext import trainer
+import pandas as pd
 
 
-def tokenize(sentences=None, sentence=None):
-    """Must call with either sentences, or sentence, not both"""
-    final = []
-
-    def tokenize_sentence(s1):
-        """Sub-function to tokenize just one sentence"""
-        p = re.compile(r'^[re:]|^[fwd:]|^=|[.edu]')
-        q = re.compile(r'[^\w\s]')
-        new_tokens1 = []
-
-        # If not reply or forward
-        if not p.match(s1):
-            # Don't get rid of mailing list emails, just the "[...]" part
-            if ']' in s1:
-                try:
-                    s1 = s1.split('] ')[1]
-                except IndexError:
-                    pass
-            # Split into individual sentences
-            new_sentences1 = s1.split('. ')  # Maybe change to sent_tokenize?
-            for s in new_sentences1:
-                tokens1 = word_tokenize(s)
-                for tok in tokens1:
-                    # Ignore special characters
-                    if not q.match(tok) and len(tok) > 2:
-                        new_tokens1.append(tok)
-        return new_tokens1
-
-    if sentences and not sentence:
-        # If function was given list of many sentences
-        for s1 in sentences:
-            s = tokenize_sentence(s1)
-            if s:
-                final.append(s)
-    elif sentence and not sentences:
-        # If just one sentence was given
-        s = tokenize_sentence(sentence)
-        if s:
-            final.append(s)
-    else:
-        # If incorrect input was given
-        print("\n\n\nError: Must call tokenize() with either string or list of strings, not both")
-        print(f"{sentence}\n{sentences}")
-        exit(1)
-    return final
+def label(subject_lines):
+    labeled = {
+        "text": [],
+        "keywords": []
+    }
+    # extract keys from subject lines as their labels
+    for line in subject_lines:
+        if len(line) <= 1:
+            continue
+        phrase = extractkeys.rake(line)[0]
+        tok_phrase = word_tokenize(phrase)
+        if len(tok_phrase) <= 1:
+            continue
+        x = extractkeys.head(tok_phrase, False)
+        if not x or len(x) < 3:
+            continue
+        keywords = ''
+        for token in x:
+            keywords += str(token) + ' '
+        detokenize = TreebankWordDetokenizer().detokenize
+        labeled["text"].append(detokenize(line))
+        labeled["keywords"].append(keywords)
+    df = pd.DataFrame(labeled)
+    print(df)
+    return df
 
 
-def get_charsets(msg):
-    """Keep track of possible charsets used for encoding"""
-    charsets = set({})
-    for c in msg.get_charsets():
-        if c is not None:
-            charsets.update([c])
-    return charsets
+def train(labeled_data):
+    train, test = train_test_split(labeled_data, shuffle=True)
+    model = trainer()
+    model.from_pretrained()
+    model.train(train_df=train, test_df=test, use_gpu=False)
+    model.save_model()
+    return model
 
 
-def get_body(msg):
-    """Parse an email for its body text"""
-    while msg.is_multipart():
-        msg = msg.get_payload()[0]
-    b = msg.get_payload(decode=True)
-    for charset in get_charsets(msg):
+def generate():
+    # generate subject line with model
+    while True:
+        i = ""
+        x = input("Input the email body or 'exit' to exit:")
+        if x == 'exit':
+            break
         try:
-            b = b.decode(charset)
-        except UnicodeDecodeError as e:
-            pass
-    return b
-
-
-def t(a, b):
-    """Tokenize the subject (a) and the body (b), then put result in multiprocessing queue"""
-    c = tokenize(sentence=a)
-    d = tokenize(sentences=b)
-    Q.put((c, d))
-
-
-def stats(length, start, i, message):
-    """Display runtime statistics"""
-    ave_time = (datetime.now() - start).seconds / i
-    minutes_left = int(((length - i) * ave_time) / 60)
-    if minutes_left > 0:
-        minutes_message = f'Approximately {minutes_left} minute(s) remaining'
-    else:
-        minutes_message = f'Less than a minute remaining                    '
-
-    print(f'{message}\n'
-          f'{round((i / length) * 100, 2)}% done     \n'
-          f'{minutes_message}',
-          end='\r\033[A\r\033[A\r')
-
-
-def setup():
-    """Initialize starting values and global variables"""
-    global Q, POOL
-    multiprocessing.set_start_method('fork')
-    Q = multiprocessing.Manager().Queue()
-    POOL = multiprocessing.Pool(6)
-    nltk.download('averaged_perceptron_tagger')
-    nltk.download('tagsets')
+            with open(f"{x}", 'r') as file:
+                i = file.read()
+        except Exception as e:
+            print("Nope, try again!")
+            exit(1)
+        sents = sent_tokenize(i)
+        body = []
+        # sent and word tokenize input
+        for sent in sents:
+            body.append(word_tokenize(sent))
+        # extract keywords from body
+        keywords = []
+        key_sents = extractkeys.embedding(body, False)
+        for sent in key_sents:
+            phrase = extractkeys.rake(sent)[0]
+            tok_phrase = word_tokenize(phrase)
+            x = extractkeys.head(tok_phrase, False)
+            if not x:
+                continue
+            for token in x:
+                keywords.append(str(token))
+        if len(keywords) < 3:
+            print("Sorry! Try again")
+            continue
+        # generate
+        return keywords
 
 
 def main():
-    global POOL, Q
-    mb = mbox('data/Opened-002.mbox')
-    final_json = {"emails": []}
-    subject_lines = {}
-    bodies = {}
-    start = datetime.now()
-    length = len(list(mb.iteritems()))
-    id = 0
-    # tuples blueprint: ({[tokenized subject]}, [[list], [of], [tokenized], [body], [sentences]]])
-    # Subject is always assumed to be just one sentence
-    # "final_json['emails']" will be list of tuples, one per email
-
-    # Parse for subject lines and email bodies
-    for message in mb:
-        dmessage = dict(message.items())
-        subject = dmessage['Subject']
-        body = get_body(message)
-        subject_lines[f"{id}"] = subject
-        bodies[f"{id}"] = body
-        id += 1
-        stats(length, start, id, "Reading files...             ")
-
-    i = 0
-    e = 0
-    start = datetime.now()
-    length = len(subject_lines.keys())
-    for x in subject_lines.keys():
-        # Generate the tokenized lists with multiprocessing
-        a = subject_lines[f"{x}"]
-        b = []
-        try:
-            b = sent_tokenize(bodies[f"{x}"])
-        except Exception:
-            pass
-        new_b = []
-
-        # Get rid of whitespace and random characters
-        for m in b:
-            new_m = re.sub(r"[\n]|[\s ]+", " ", m).lower()
-            new_m = re.sub(r"[<]|[>]|[*]", "", new_m)
-            new_b.append(new_m)
-
-        # Stopgap measure for weird bug
-        if not len(new_b) > 1:
-            new_b.append(" ")
-        if a and b:
-            POOL.apply(t, (a, new_b))
-            e += 1
-        i += 1
-        stats(length, start, i, 'Creating processes...     ')
-
-    i = 0
-    start = datetime.now()
-    while True:
-        # Accrue output data and save periodically
-        output = Q.get()
-        if output[0] is not None and output[1] is not None:
-            final_json['emails'].append(output)
-            i += 1
-            stats(length, start, i, 'Finishing processes...      ')
-        if i % 50 == 0:
-            with open('data.json', 'w') as save_file:
-                json.dump(final_json, save_file, indent=4)
-        if i == e:
-            break
-    print(f'Data has been generated and saved')
-    with open("data.json", "w") as save_file:
-        json.dump(final_json, save_file, indent=4)
-    return
+    t = trainer()
+    t.load_model(model_dir='./model')
+    keywords = generate()
+    subject = t.predict(keywords, use_gpu=False)
+    print(f"Suggested subject line:\n{subject}")
 
 
 if __name__ == '__main__':
-    setup()
     main()
